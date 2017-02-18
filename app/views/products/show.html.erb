@@ -1,29 +1,27 @@
-<p id="notice"><%= notice %></p>
+<div class="content">
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Picture:</strong>
-  <%= @product.picture %>
-</p>
+    <p>
+        <strong><%= @product.name%></strong> <br>
+        <%= image_tag(@product.picture) %>
+    </p>
 
-<p>
-  <strong>Price:</strong>
-  <%= @product.price %>
-</p>
+    <p>
+        This <%= @product.name.downcase %> has a price of <%= @product.price %> and a score of <%= @product.score %>, making it
+        a
+        <% if @product.score > 75 %>
+            good deal
+        <% elsif @product.score > 50 %>
+            relatively good deal
+        <% elsif @product.score > 25 %>
+            relatively bad deal
+        <% else %>
+            bad deal
+        <% end %>
+    </p>
 
-<p>
-  <strong>Score:</strong>
-  <%= @product.score %>
-</p>
 
-<p>
-  <strong>Link:</strong>
-  <%= @product.link %>
-</p>
+    <%= link_to "Buy", @product.link, class: "btn btn-default" %>
 
-<p>
-  <strong>Material:</strong>
-  <%= @product.material %>
-</p>
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+    <%= link_to 'Back', products_path %>
+</div>
