@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import urllib.request
+import csv
 
 def header(url):
 	headers = {
@@ -48,7 +49,6 @@ def find_Wattage(battery, life):
 		return "Cannot compute wattage!"
 
 
-
 def parse_item(url):
 	soup = header(url)
 	print(url)
@@ -79,9 +79,22 @@ def parse_item(url):
 		msg += "," + str(wat) + ","
 	return msg
 
-#parse_item('https://www.newegg.com/Product/Product.aspx?Item=9SIA0AJ2330001&cm_re=google_laptops-_-9SIA0AJ2330001-_-Product')
+#parse_item('https://www.newegg.com/Product/Product.aspx?Item=9SIA60G3ZE0281&cm_re=google_laptops-_-9SIA60G3ZE0281-_-Product')
 
 d=main('google laptops')
 f=open('newegg.csv','a')
 f.write(d)
 f.close()
+
+input_file = 'newegg.csv'
+output_file = 'NEWegg.csv'
+
+with open(input_file) as f:
+    lines = f.readlines()
+
+for line in lines:
+    watt = line.split(",")[3]
+    if watt.isnumeric():
+    	print("hi")
+    	with open(output_file, 'a') as myfile:
+            myfile.write(line)
