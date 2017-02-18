@@ -24,6 +24,7 @@ def main(key):
 		children = link.findChildren()
 		img.append(children[0])
 	O = "name,link,rating,wattage,picture,keyword"
+	O = ""
 	i = 0;
 	while i < len(links):
 		O += "\n" + parse_item(links[i].get('href'))
@@ -73,15 +74,16 @@ def parse_item(url):
 			battery_life = battery.find_next_sibling()
 			wat = find_Wattage(str(battery),str(battery_life))	
 	if wat == 0 or wat == "Cannot compute wattage!":
-		msg += "," + "0" + ","
+		msg += ",,,"
 		return msg
 	else: 
-		score = str((int(wat) * -1) + 100)
+		score = str((int(wat) * -1.25) + 100)
 		msg += score + str(wat) + ","
 	return msg
 
 #parse_item('https://www.newegg.com/Product/Product.aspx?Item=9SIA60G3ZE0281&cm_re=google_laptops-_-9SIA60G3ZE0281-_-Product')
 
+#google laptops
 d=main('google laptops')
 f=open('newegg.csv','a')
 f.write(d)
