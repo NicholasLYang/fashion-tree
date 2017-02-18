@@ -37,6 +37,18 @@
         background-image: image-url("fashion-background-small-2.jpg");
     }
 }
+
+@media (max-device-width: 500px) {
+    .parallax-img {
+        background-image: image-url("fashion-background-tiny.jpg");
+    }
+    .parallax-img-2 {
+        background-image: image-url("electronics-background-tiny.jpg");
+    }
+    .parallax-img-3 {
+        background-image: image-url("fashion-background-tiny-2.jpg");
+    }    
+}
 .image-text {
     color: white;
 }
