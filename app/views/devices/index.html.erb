@@ -1,39 +1,19 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Devices</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Link</th>
-      <th>Price</th>
-      <th>Score</th>
-      <th>Watts</th>
-      <th>Picture</th>
-      <th>Keyword</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @devices.each do |device| %>
-      <tr>
-        <td><%= device.name %></td>
-        <td><%= device.link %></td>
-        <td><%= device.price %></td>
-        <td><%= device.score %></td>
-        <td><%= device.watts %></td>
-        <td><%= device.picture %></td>
-        <td><%= device.keyword %></td>
-        <td><%= link_to 'Show', device %></td>
-        <td><%= link_to 'Edit', edit_device_path(device) %></td>
-        <td><%= link_to 'Destroy', device, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Device', new_device_path %>
+<div class="body">
+<div class="header">
+  <h1>Devices</h1>
+</div>
+<% @devices.each do |device| %>
+<div class="square">
+  <div class="content">
+      <div class="hovereffect">
+        <%= image_tag(device.picture, class: "img-responsive") %>
+        <div class="overlay">
+           <h2><%= device.score %></h2>
+           <%= link_to 'More', device, class: 'info' %>
+        </div>
+      </div>
+  </div>
+</div>
+<% end %>
+</div>
