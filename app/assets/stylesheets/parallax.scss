@@ -1,7 +1,7 @@
 
 .parallax{
     /* Set a specific height */
-    height: 800px;
+    height: 600px;
 
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
@@ -16,16 +16,23 @@
 }
 
 .parallax-img-2 {
-    background-image: image-url("fashion-background-large-2.jpg");
+    background-image: image-url("electronics-background-large.jpg");
     @extend .parallax
 }
 
+.parallax-img-3 {
+    background-image: image-url("fashion-background-large-2.jpg");
+    @extend .parallax
+}
 
 @media (max-device-width: 860px) {
     .parallax-img {
         background-image: image-url("fashion-background-small.jpg");
     }
     .parallax-img-2 {
+        background-image: image-url("electronics-background-small.jpg");
+    }
+    .parallax-img-3 {
         background-image: image-url("fashion-background-small-2.jpg");
     }
 }

@@ -1,19 +1,28 @@
 <div class="navbar navbar-default navbar-fixed-top">
-
-    <ul>
-        <li>
-            <% if current_page?(root_path) %>
-                <%= link_to "About", root_path(:anchor=> "about") %>
-            <% else %>
-                <%= link_to "About", welcome_index_path(:anchor=> "about") %>
-            <% end %>
-        </li>
-        <li>
-            <%= link_to "Products", products_path %>
-        </li>
-    </ul>
-    
-    <center>
-            <a href="../" class="navbar-brand">Fashion Tree</a>
-    </center>
-</div>
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../" class="navbar-brand">Fashion Tree</a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+                <% if current_page?(root_path) %>
+                    <%= link_to "About", root_path(:anchor => "about") %>
+                <% else %>
+                    <%= link_to "About", welcome_index_path(:anchor => "about") %>
+                <% end %>
+            </li>
+            <li>
+                <%= link_to "Clothes", products_path %>
+            </li>
+            <li>
+                <%= link_to "Electronics", devices_path %>
+            </li>
+        </div>
+      </div>
+    </div>
