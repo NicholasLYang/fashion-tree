@@ -38,10 +38,10 @@ def find_Wattage(battery, life):
 	r = re.compile(r"[0-9]*(?=[ -]watt)")
 	a = re.compile(r"[0-9]*(?= Hour)")
 	if p.search(battery) and a.search(life):
-		watt = round(int(re.findall(p,battery)[0])/int(re.findall(a,life)[0]))
+		watt = int(int(re.findall(p,battery)[0])/int(re.findall(a,life)[0]))
 		return watt
 	elif q.search(battery) and a.search(life):
-		watt = round(int(re.findall(q,battery)[0])/int(re.findall(a,life)[0]))
+		watt = int(int(re.findall(q,battery)[0])/int(re.findall(a,life)[0]))
 		return watt
 	elif r.search(battery):
 		return re.findall(r,battery)[0]
@@ -72,11 +72,12 @@ def parse_item(url):
 			battery = watt.find_next_sibling().find_next_sibling()
 			battery_life = battery.find_next_sibling()
 			wat = find_Wattage(str(battery),str(battery_life))	
-	if wat == 0:
-		msg += "," + ","
+	if wat == 0 or wat == "Cannot compute wattage!":
+		msg += "," + "0" + ","
 		return msg
 	else: 
-		msg += "," + str(wat) + ","
+		score = str((int(wat) * -1) + 100)
+		msg += score + str(wat) + ","
 	return msg
 
 #parse_item('https://www.newegg.com/Product/Product.aspx?Item=9SIA60G3ZE0281&cm_re=google_laptops-_-9SIA60G3ZE0281-_-Product')
