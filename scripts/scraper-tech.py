@@ -85,7 +85,7 @@ d=main('google laptops')
 f=open('newegg.csv','a')
 f.write(d)
 f.close()
-
+'''
 input_file = 'newegg.csv'
 output_file = 'NEWegg.csv'
 
@@ -100,3 +100,4 @@ for line in lines:
 
 f1.close()
 myfile.close()
+'''
