@@ -76,7 +76,7 @@ def parse_item(url):
 		msg += "," + ","
 		return msg
 	else: 
-		msg += str(wat) + ","
+		msg += "," + str(wat) + ","
 	return msg
 
 d=main('google laptops')
