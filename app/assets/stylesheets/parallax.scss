@@ -17,6 +17,7 @@
 
 .parallax-img-2 {
     background-image: image-url("electronics-background-large.jpg");
+    height: 400px;
     @extend .parallax
 }
 
