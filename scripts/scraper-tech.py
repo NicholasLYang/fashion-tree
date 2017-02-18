@@ -84,8 +84,8 @@ def parse_item(url):
 #parse_item('https://www.newegg.com/Product/Product.aspx?Item=9SIA60G3ZE0281&cm_re=google_laptops-_-9SIA60G3ZE0281-_-Product')
 
 #google laptops
-d=main('google laptops')
-f=open('newegg.csv','a')
+d=main('msi laptops')
+f=open('newegg-msi.csv','a')
 f.write(d)
 f.close()
 '''
