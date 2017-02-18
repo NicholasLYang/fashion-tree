@@ -89,11 +89,14 @@ f.close()
 input_file = 'newegg.csv'
 output_file = 'NEWegg.csv'
 
-with open(input_file) as f:
-    lines = f.readlines()
+with open(input_file) as f1:
+    lines = f1.readlines()
 
 for line in lines:
     watt = line.split(",")[3]
     if watt.isnumeric():
-    	with open(output_file, 'a') as myfile:
+    	with open(output_file, 'w') as myfile:
             myfile.write(line)
+
+f1.close()
+myfile.close()
