@@ -7,9 +7,9 @@
 <div class="square">
   <div class="content">
       <div class="hovereffect">
-        <%= image_tag(device.picture, class: "img-responsive") %>
+        <%= image_tag("https://" + device.picture, class: "img-responsive") %>
         <div class="overlay">
-           <h2><%= device.score %></h2>
+           <h2><%= device.name.truncate(18, omission: "...") %></h2>
            <%= link_to 'More', device, class: 'info' %>
         </div>
       </div>
