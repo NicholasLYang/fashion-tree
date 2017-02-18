@@ -1,0 +1,19 @@
+.parallax{
+    /* Set a specific height */
+    height: 500px; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.parallax-img {
+    background-image: image-url("fashion-background.jpg");
+    @extend .parallax;
+}
+
+.parallax-img-2 {
+    background-image: image-url("fashion-background-2.jpg");
+    @extend .parallax
+}
