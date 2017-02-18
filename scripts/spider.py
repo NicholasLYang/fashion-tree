@@ -31,17 +31,43 @@ def parse_item(url):
         row += image + ","
     price = re.search(r'\$\d{1,2}\.\d{2}',HTML[HTML.find('text-price'):]).group(0)
     row += price + ","
-    score = 98
-    row += str(score) + ","
-    row += url + ","
+
     material_start = HTML.find('text-information') + 18
-    material = HTML[material_start:HTML.find('.',material_start)].replace(',',' ')
+    material = HTML[material_start:HTML.find('.',material_start)]
+
+    row += str(computeScore(material)) + ","
+    row += url + ","
+ 
     row += material + ","
     name_end = HTML.find('<span class="price"')
     name = HTML[HTML.rfind('>',name_end-100,name_end)+1:name_end].strip()
     row += name + ","
 
     return row
+
+def computeScore(material):
+    energy_consumption = {
+        'cotton': 49,
+        'wool': 8,
+        'polyester': 109,
+        'viscose': 71,
+        'spandex': 135,
+        'rayon': 68
+        }
+    water_consumption = {
+        'cotton': 12500,
+        'wool': 125,
+        'polyester': 0,
+        'viscose': 640,
+        'spandex': 26,
+        'rayon': 190
+        }    
+    materials = material.split(', ')
+    score = 0.0
+    for m in materials:
+        m = m.split('% ')
+        score += int(m[0]) / 100 * (energy_consumption[m[1]] + water_consumption[m[1]]) / 2
+    return score
 
 f = open('ex.csv','w',errors='ignore')
 f.write(query('jeans'))
