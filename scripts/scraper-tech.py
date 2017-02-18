@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import urllib.request
+import csv
 
 def header(url):
 	headers = {
@@ -22,7 +23,7 @@ def main(key):
 	for link in links:
 		children = link.findChildren()
 		img.append(children[0])
-	O = "Name,Link,Rating,Wattage,Image,Keyword"
+	O = "name,link,rating,wattage,picture,keyword"
 	i = 0;
 	while i < len(links):
 		O += "\n" + parse_item(links[i].get('href'))
@@ -48,7 +49,6 @@ def find_Wattage(battery, life):
 		return "Cannot compute wattage!"
 
 
-
 def parse_item(url):
 	soup = header(url)
 	print(url)
@@ -62,7 +62,7 @@ def parse_item(url):
 	h1 = soup.find('h1', {'id' : 'grpDescrip_h'})
 	name = h1.findChildren()[0].text
 
-	msg += name.strip().replace(",","") + "," + url + ","
+	msg += name.strip().replace(",","").replace('"',"") + "," + url + ","
 
 	#getting wattage
 	w = soup.find_all('h3', {'class' : 'specTitle'})
@@ -79,9 +79,25 @@ def parse_item(url):
 		msg += "," + str(wat) + ","
 	return msg
 
-#parse_item('https://www.newegg.com/Product/Product.aspx?Item=9SIA0AJ2330001&cm_re=google_laptops-_-9SIA0AJ2330001-_-Product')
+#parse_item('https://www.newegg.com/Product/Product.aspx?Item=9SIA60G3ZE0281&cm_re=google_laptops-_-9SIA60G3ZE0281-_-Product')
 
 d=main('google laptops')
 f=open('newegg.csv','a')
 f.write(d)
 f.close()
+'''
+input_file = 'newegg.csv'
+output_file = 'NEWegg.csv'
+
+with open(input_file) as f1:
+    lines = f1.readlines()
+
+for line in lines:
+    watt = line.split(",")[3]
+    if watt.isnumeric():
+    	with open(output_file, 'w') as myfile:
+            myfile.write(line)
+
+f1.close()
+myfile.close()
+'''

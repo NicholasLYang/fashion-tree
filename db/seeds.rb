@@ -5,11 +5,33 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-products = Product.create([
-                            {picture: 'http://lp.hm.com/hmprod?set=key[source],value[/model/2016/E00%200317980%20005%2030%201243.jpg]&set=key[rotate],value[]&set=key[width],value[]&set=key[height],value[]&set=key[x],value[]&set=key[y],value[]&set=key[type],value[STILL_LIFE_FRONT]&set=key[hmver],value[6]&call=url[file:/product/large',
-                             price: 18,
-                             score: 20,
-                             link: "https://www.horriblyunderqualified.com",
-                             material: "Gold",
-                             name: "Shoe"}
-                          ])
+require 'csv'
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'handm.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each do |row|
+  p = Product.new
+  p.picture = row['picture']
+  p.price = row['price'][1..-1]
+  p.score = row['score']
+  p.link = row['link']
+  p.keyword = row['keyword']
+  p.name = row['name']
+  p.material = row['material']
+  p.save
+end
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'newegg.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each do |row|
+  wattage = row['wattage'].to_f
+  next if wattage == 0.0
+  d = Device.new
+  d.picture = row['picture']
+  d.score = row['score']
+  d.link = row['link']
+  d.keyword = row['keyword']
+  d.name = row['name']
+  d.watts = wattage
+  d.save
+end
