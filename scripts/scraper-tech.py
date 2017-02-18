@@ -23,7 +23,7 @@ def main(key):
 	for link in links:
 		children = link.findChildren()
 		img.append(children[0])
-	O = "Name,Link,Rating,Wattage,Image,Keyword"
+	O = "name,link,rating,wattage,picture,keyword"
 	i = 0;
 	while i < len(links):
 		O += "\n" + parse_item(links[i].get('href'))
