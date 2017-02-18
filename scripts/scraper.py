@@ -2,22 +2,22 @@ from bs4 import BeautifulSoup
 import requests
 import urllib.request
 
-def main(url):
+def scrape(keyword):
+	url = 'https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=' + keyword
 	headers = {
 	    'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36'
 	}
 	r = requests.get(url, headers=headers)
 	soup = BeautifulSoup(r.content, "html.parser")
-
-	links = soup.find_all('a', {'class': 'a-link-normal s-access-detail-page a-text-normal'}) [2: ]
-	img = soup.find_all('img', {'class': 's-access-image cfMarker'}) [2: ]
+	links = soup.find_all('a', {'class': 'a-link-normal a-text-normal'})[:1]
+	img = soup.find_all('img', {'class': 's-access-image cfMarker'})[:1]
 	O = "Name,Material,Price,Image"
 	
 	i = 0;
 	while i < len(links):
 		O += "\n" + parse_item(links[i].get('href'))
 		O += img[i].get('src')
-		i += 1
+		i += 2
 
 	return O
 
@@ -48,3 +48,5 @@ def parse_item(url):
 	msg += price + ","
 
 	return msg
+
+
