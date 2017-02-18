@@ -1,13 +1,24 @@
+<<<<<<< HEAD
 import urllib2
 import re
 
 url='https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=pants&rh=i%3Aaps%2Ck%3Apants'
 def parse(url):
     opener = urllib2.build_opener()
+=======
+import urllib.request
+import re
+
+
+def parse(url):
+    
+    opener = urllib.request.build_opener()
+>>>>>>> 926d79094756af570c0ee385d13488191525fd59
     opener.addheaders = [('User-agent', 'Mozilla/5.0')]
     response = opener.open( url )
     HTML = response.read()
 
+<<<<<<< HEAD
     ul_start = HTML.find('<ul id="s-results-list-atf"')
     ul_end = HTML.find('</ul>',ul_start)
     ul = HTML[ul_start:ul_end]
@@ -29,10 +40,16 @@ def parse_item(url):
     HTML = response.read()
     M = {}
 
+=======
+>>>>>>> 926d79094756af570c0ee385d13488191525fd59
     ul_start = HTML.find('<ul class="a-vertical a-spacing-none"')
     ul_end = HTML.find('</ul>',ul_start)
     ul = HTML[ul_start:ul_end]
     ul = ul.split('<li><span class="a-list-item">')[1:]
+<<<<<<< HEAD
+=======
+
+>>>>>>> 926d79094756af570c0ee385d13488191525fd59
     for item in ul: 
         if '%' in item:
             M["MATERIAL"] = item.replace('</span></li>','').strip()
