@@ -11,18 +11,23 @@ def header(url):
 	soup = BeautifulSoup(r.content, "html.parser")
 	return soup
 
-def main(url):
-	soup = header(url)
+def gen_url(key):
+	url = "https://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=" + key.replace(" ","+") + "&N=-1&isNodeId=1"
+	return url
+
+def main(key):
+	soup = header(gen_url(key))
 	links = soup.find_all('a', {'class': 'item-img'})
 	img = []
 	for link in links:
 		children = link.findChildren()
 		img.append(children[0])
-	O = "Name,Link,Rating,Wattage,Keyword,Image"
+	O = "Name,Link,Rating,Wattage,Image,Keyword"
 	i = 0;
 	while i < len(links):
 		O += "\n" + parse_item(links[i].get('href'))
-		O += "Image: " + img[i].get('src').replace("//","") + "/n"
+		O += img[i].get('src').replace("//","") + ","
+		O += key + "/n"
 		i += 1
 	return O
 
@@ -57,7 +62,7 @@ def parse_item(url):
 	h1 = soup.find('h1', {'id' : 'grpDescrip_h'})
 	name = h1.findChildren()[0].text
 
-	msg += "Name: " + name.strip() + "," + url + ","
+	msg += name.strip() + "," + url + ","
 
 	#getting wattage
 	w = soup.find_all('h3', {'class' : 'specTitle'})
@@ -67,10 +72,14 @@ def parse_item(url):
 			battery = watt.find_next_sibling().find_next_sibling()
 			battery_life = battery.find_next_sibling()
 			wat = find_Wattage(str(battery),str(battery_life))	
-	msg += "Watt: " + str(wat) + "," + ","
+	if wat == 0:
+		msg += "," + ","
+		return msg
+	else: 
+		msg += str(wat) + ","
 	return msg
 
-d=main('https://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=google+laptops&N=-1&isNodeId=1')
+d=main('google laptops')
 f=open('newegg.csv','a')
 f.write(d)
 f.close()
