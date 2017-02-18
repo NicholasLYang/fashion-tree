@@ -20,12 +20,10 @@ def main(url):
 		img.append(children[0])
 	O = "Name,Link,Rating,Wattage,Keyword,Image"
 	i = 0;
-	'''
 	while i < len(links):
 		O += "\n" + parse_item(links[i].get('href'))
-		O += img[i].get('src').replace("//","")
+		O += "Image: " + img[i].get('src').replace("//","") + "/n"
 		i += 1
-	'''
 	return O
 
 def find_Wattage(battery, life):
@@ -44,6 +42,8 @@ def find_Wattage(battery, life):
 	else:
 		return "Cannot compute wattage!"
 
+
+
 def parse_item(url):
 	soup = header(url)
 	print(url)
@@ -57,17 +57,20 @@ def parse_item(url):
 	h1 = soup.find('h1', {'id' : 'grpDescrip_h'})
 	name = h1.findChildren()[0].text
 
-	msg += name.strip() + ","
+	msg += "Name: " + name.strip() + "," + url + ","
 
 	#getting wattage
 	w = soup.find_all('h3', {'class' : 'specTitle'})
+	wat = 0
 	for watt in w:
 		if watt.text == 'Power':
 			battery = watt.find_next_sibling().find_next_sibling()
 			battery_life = battery.find_next_sibling()
-			watt = find_Wattage(str(battery),str(battery_life))
-			msg += str(watt) + ","
-
+			wat = find_Wattage(str(battery),str(battery_life))	
+	msg += "Watt: " + str(wat) + "," + ","
 	return msg
 
-parse_item('https://www.newegg.com/Product/Product.aspx?Item=9SIA1K64A00598')
+d=main('https://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=google+laptops&N=-1&isNodeId=1')
+f=open('newegg.csv','a')
+f.write(d)
+f.close()
