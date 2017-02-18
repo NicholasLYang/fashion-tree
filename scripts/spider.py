@@ -35,14 +35,13 @@ def parse_item(url):
     row += str(score) + ","
     row += url + ","
     material_start = HTML.find('text-information') + 18
-    material = HTML[material_start:HTML.find('.',material_start)].replace(','+' ')
+    material = HTML[material_start:HTML.find('.',material_start)].replace(',',' ')
     name_end = HTML.find('<span class="price"')
     name = HTML[HTML.rfind('>',name_end-100,name_end)+1:name_end].strip()
     row += name + ","
 
     return row
 
-if name == '__main__':
-    f = open('ex.csv','w')
-    f.write(query('jeans'))
-    f.close()
+f = open('ex.csv','w',errors='ignore')
+f.write(query('jeans'))
+f.close()
