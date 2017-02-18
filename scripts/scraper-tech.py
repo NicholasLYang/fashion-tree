@@ -62,7 +62,7 @@ def parse_item(url):
 	h1 = soup.find('h1', {'id' : 'grpDescrip_h'})
 	name = h1.findChildren()[0].text
 
-	msg += name.strip().replace(",","") + "," + url + ","
+	msg += name.strip().replace(",","").replace('"',"") + "," + url + ","
 
 	#getting wattage
 	w = soup.find_all('h3', {'class' : 'specTitle'})
