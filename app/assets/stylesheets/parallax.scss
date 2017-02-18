@@ -27,6 +27,9 @@
 }
 
 @media (max-device-width: 860px) {
+    .parallax {
+        height: 200px;
+    }
     .parallax-img {
         background-image: image-url("fashion-background-small.jpg");
     }
