@@ -11,31 +11,19 @@ def scrape(keyword):
     }
     r = requests.get(url, headers=headers)
     soup = BeautifulSoup(r.content, "html.parser")
-    links = soup.find_all('a', {'class': 'a-link-normal s-access-detail-page a-text-normal'})[2:-1]
+    links = soup.find_all('a', {'class': 'a-link-normal s-access-detail-page s-overflow-ellipsis a-text-normal'})[2:-1]
 
-    """
-    img = soup.find_all('img', {'class': 's-access-image cfMarker'})[1:-1]
-    output = "Name,Link,Price,Rating,Material,Keyword,Image"
-    i = 0
-
-    while i < len(links):
-            if 'Redirect' in links[i].get('href'):
-                    i += 1
-                    continue
-            print(links[i].get('href'),i)
-            output += "\n" + parse_item(links[i].get('href'))
-            output += img[i].get('src')
-            i += 1
-    """
-
-    extracted = []
-    for link in links:
+    extracted = ""
+    for link in links[:10]:
         if link.find('/gp/') == 0:
-            continue        
-        asin = re.search(r'B\w{9}', link.get('href')).group(0)
+            continue
+        try:
+            asin = re.search(r'B\w{9}', link.get('href')).group(0)
+        except:
+            print(link.get('href'))
         print(asin)
-        extracted.append(AmzonParser("http://amazon.com/dp/" + asin))
-                         
+        extracted += "\n" + (AmzonParser("http://amazon.com/dp/" + asin))
+
     f = open('data.json','w')
     json.dump(extracted,f,indent=4)
 
@@ -49,29 +37,25 @@ def AmzonParser(url):
             XPATH_SALE_PRICE = '//span[contains(@id,"ourprice") or contains(@id,"saleprice")]/text()'
             XPATH_ORIGINAL_PRICE = '//td[contains(text(),"List Price") or contains(text(),"M.R.P") or contains(text(),"Price")]/following-sibling::td/text()'
             XPATH_MATERIAL = '//a[@class="a-link-normal a-color-tertiary"]//text()'
-            XPATH_AVAILABILITY = '//div[@id="availability"]//text()'
 
             RAW_NAME = doc.xpath(XPATH_NAME)
             RAW_SALE_PRICE = doc.xpath(XPATH_SALE_PRICE)
-            RAW_MATERIAL = doc.xpath(XPATH_CATEGORY)
+            RAW_MATERIAL = doc.xpath(XPATH_MATERIAL)
             RAW_ORIGINAL_PRICE = doc.xpath(XPATH_ORIGINAL_PRICE)
-            RAw_AVAILABILITY = doc.xpath(XPATH_AVAILABILITY)
 
             NAME = ' '.join(''.join(RAW_NAME).split()) if RAW_NAME else None
             SALE_PRICE = ' '.join(''.join(RAW_SALE_PRICE).split()).strip() if RAW_SALE_PRICE else None
-            MATERIAL = ' > '.join([i.strip() for i in RAW_CATEGORY]) if RAW_CATEGORY else None
+            MATERIAL = ' > '.join([i.strip() for i in RAW_MATERIAL]) if RAW_MATERIAL else None
             ORIGINAL_PRICE = ''.join(RAW_ORIGINAL_PRICE).strip() if RAW_ORIGINAL_PRICE else None
-            AVAILABILITY = ''.join(RAw_AVAILABILITY).strip() if RAw_AVAILABILITY else None
 
             if not ORIGINAL_PRICE:
                 ORIGINAL_PRICE = SALE_PRICE
 
             data = {
-                    'NAME':NAME,
+                    'NAME': NAME,
                     'SALE_PRICE':SALE_PRICE,
                     'MATERIAL':MATERIAL,
                     'ORIGINAL_PRICE':ORIGINAL_PRICE,
-                    'AVAILABILITY':AVAILABILITY,
                     'URL':url,
                     }
 
@@ -111,4 +95,4 @@ def parse_item(url):
 
     return msg
 
-scrape('kitty')
+scrape('jeans')
