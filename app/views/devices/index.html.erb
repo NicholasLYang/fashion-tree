@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+<div class="body">
+<div class="header">
+  <h1>Devices</h1>
+</div>
+<% @devices.each do |device| %>
+<div class="square">
+  <div class="content">
+      <div class="hovereffect">
+        <%= image_tag(device.picture, class: "img-responsive") %>
+        <div class="overlay">
+           <h2><%= device.score %></h2>
+           <%= link_to 'More', device, class: 'info' %>
+        </div>
+      </div>
+  </div>
+</div>
+<% end %>
+</div>

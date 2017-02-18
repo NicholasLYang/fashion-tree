@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  link: MyString
+  price: 1.5
+  score: 1
+  watts: 1.5
+  picture: MyString
+  keyword: MyString
+
+two:
+  name: MyString
+  link: MyString
+  price: 1.5
+  score: 1
+  watts: 1.5
+  picture: MyString
+  keyword: MyString
