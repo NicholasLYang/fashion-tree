@@ -42,3 +42,7 @@ def parse_item(url):
 
     return row
 
+if name == '__main__':
+    f = open('ex.csv','w')
+    f.write(query('jeans'))
+    f.close()
