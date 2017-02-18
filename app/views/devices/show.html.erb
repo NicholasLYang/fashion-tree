@@ -1,39 +1,31 @@
+<div class="content">
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @device.name %>
+  <strong><%=@device.name %></strong> <br>
+  <%= image_tag(@device.picture) %>
 </p>
 
 <p>
-  <strong>Link:</strong>
-  <%= @device.link %>
+  <% unless @device.price %>
+  This <%= @device.name.downcase %> has a price of <%= @device.price %>. Furthermore, it
+  <% else %>
+  Unfortunately, this website does not display the price, however, this <%= @device.name.downcase %>
+  <% end %> has a score of <%= @device.score %>, and a power rating of <%= @device.watts %>, making it
+  a
+    <% if @device.score > 75 %>
+        good deal
+    <% elsif @device.score > 50 %>
+        relatively good deal
+    <% elsif @device.score > 25 %>
+        relatively bad deal
+    <% else %>
+        bad deal
+    <% end %>
 </p>
 
-<p>
-  <strong>Price:</strong>
-  <%= @device.price %>
-</p>
 
-<p>
-  <strong>Score:</strong>
-  <%= @device.score %>
-</p>
+  <%= link_to "Buy", @device.link, class: "btn btn-default" %>
 
-<p>
-  <strong>Watts:</strong>
-  <%= @device.watts %>
-</p>
-
-<p>
-  <strong>Picture:</strong>
-  <%= @device.picture %>
-</p>
-
-<p>
-  <strong>Keyword:</strong>
-  <%= @device.keyword %>
-</p>
-
-<%= link_to 'Edit', edit_device_path(@device) %> |
 <%= link_to 'Back', devices_path %>
+</div>

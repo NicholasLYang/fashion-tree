@@ -9,6 +9,9 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+div:hover {
+    backdrop-filter: blur(10px)
+}
 
 .parallax-img {
     background-image: image-url("fashion-background-large.jpg");
@@ -47,7 +50,7 @@
     }
     .parallax-img-3 {
         background-image: image-url("fashion-background-tiny-2.jpg");
-    }    
+    }
 }
 .image-text {
     color: white;
