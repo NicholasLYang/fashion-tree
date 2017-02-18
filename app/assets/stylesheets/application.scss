@@ -46,13 +46,12 @@
 
 
 
-
 .square {
     float:left;
     position: relative;
     width: 30%;
     padding-bottom: 30%; /* = width for a 1:1 aspect ratio */
-    margin:1.66%;
+    margin: 0.5%;
     overflow:hidden;
 }
 
@@ -61,6 +60,11 @@
     height:100%; /* = 100% - 2*10% padding */
     width:80%; /* = 100% - 2*5% padding */
     padding: 10% 5%;
+}
+
+.body {
+    margin-top: 10%;
+    margin-left: 10%;
 }
 
 
