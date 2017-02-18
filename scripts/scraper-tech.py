@@ -62,7 +62,7 @@ def parse_item(url):
 	h1 = soup.find('h1', {'id' : 'grpDescrip_h'})
 	name = h1.findChildren()[0].text
 
-	msg += name.strip() + "," + url + ","
+	msg += name.strip().replace(",","") + "," + url + ","
 
 	#getting wattage
 	w = soup.find_all('h3', {'class' : 'specTitle'})
@@ -78,6 +78,8 @@ def parse_item(url):
 	else: 
 		msg += "," + str(wat) + ","
 	return msg
+
+#parse_item('https://www.newegg.com/Product/Product.aspx?Item=9SIA0AJ2330001&cm_re=google_laptops-_-9SIA0AJ2330001-_-Product')
 
 d=main('google laptops')
 f=open('newegg.csv','a')
