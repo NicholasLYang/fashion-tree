@@ -95,6 +95,5 @@ with open(input_file) as f:
 for line in lines:
     watt = line.split(",")[3]
     if watt.isnumeric():
-    	print("hi")
     	with open(output_file, 'a') as myfile:
             myfile.write(line)
