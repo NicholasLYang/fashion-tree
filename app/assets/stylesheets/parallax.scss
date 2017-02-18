@@ -1,6 +1,7 @@
+
 .parallax{
     /* Set a specific height */
-    height: 500px; 
+    height: 800px;
 
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
@@ -8,12 +9,27 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 .parallax-img {
-    background-image: image-url("fashion-background.jpg");
+    background-image: image-url("fashion-background-large.jpg");
     @extend .parallax;
 }
 
 .parallax-img-2 {
-    background-image: image-url("fashion-background-2.jpg");
+    background-image: image-url("fashion-background-large-2.jpg");
     @extend .parallax
 }
+
+
+@media (max-device-width: 860px) {
+    .parallax-img {
+        background-image: image-url("fashion-background-small.jpg");
+    }
+    .parallax-img-2 {
+        background-image: image-url("fashion-background-small-2.jpg");
+    }
+}
+.image-text {
+    color: white;
+}
+
