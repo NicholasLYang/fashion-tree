@@ -170,3 +170,28 @@ input[type=number]::-webkit-outer-spin-button {
 .img-responsive {
     height: 70% !important;
 }
+
+.square .content a span {
+    display: none;
+}
+
+.square .content a:hover span {
+    width: inherit;
+    height: inherit;
+    line-height: 240px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    text-align: center;
+    background: #000;
+    color: #fff;
+}
+
+.square .content a span b {
+    font-size: 1.5em;
+    padding: 8px 12px;
+    background: #000;
+    color: #fff;
+    font-family: 'Lato';
+}

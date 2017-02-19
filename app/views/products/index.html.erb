@@ -46,6 +46,8 @@
     </label>
     <p class="section-head">Sort By</p>
     radio button: environmental score, see phone & slacks
+    <p style="font:Times New Roman !important;letter-spacing: 0.01em;">FT</p>
+
 </div>
 <script>
 $('#check-men').change(function() {
@@ -101,7 +103,13 @@ $('#check-uniqlo').change(function() {
                     <%= image_tag(product.picture, class: "img-responsive") %>
                     <span><p>Shop now</p></span>
                 <% end %>
-                <p class="product-brand"><%= product.brand %></p>
+                <p class="product-brand">
+                    <% if product.brand == "hm" %>
+                        h&m
+                    <% else %>
+                        <%= product.brand %>
+                    <% end %>
+                </p>
                 <p><%= product.name %></p>
                 <p id="price">$<%= product.price %></p>
                 <% if product.score < 12.0 %>
