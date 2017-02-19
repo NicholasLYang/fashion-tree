@@ -45,11 +45,13 @@ def parse_item(url,keyword):
     material_start = HTML.find('text-information') + 18
     material = HTML[material_start:HTML.find('.',material_start)].replace('metallic fiber','metallic-fiber')
     materials = material.split(', ')
+
     try:
         score = score_calculator.main(materials)
+        print(score)
+    except TypeError:
+        score = 10.98 # Metal value
 
-    except:
-        score = 10.98 # metal
     row += str(score) + ","
     # link
     row += url + ","

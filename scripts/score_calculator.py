@@ -40,9 +40,9 @@ def calculate_score(materials):
     out = 0.1
     for key in materials:
         val = int(materials[key][:-1])
-        out = out + (val * water_consumption[key.lower()] +
-                     val * energy_consumption[key.lower()])/2
-    return (627450/out + 20)/2
+        out = out + (water_consumption[key.lower()] + energy_consumption[key.lower()]) * val
+        print(out)/100
+    return out
 
 def main(materials):
     return calculate_score(read_materials(materials))
