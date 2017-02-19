@@ -183,3 +183,10 @@ h2:hover {
     position: relative;
     right: 40px;
 }
+.navbar-collapse {
+    transition-duration: .4s;
+    max-height: 55px;
+}
+.navbar-collapse:hover {
+    background-color: #fff;
+}
