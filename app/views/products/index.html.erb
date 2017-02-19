@@ -92,7 +92,7 @@ $('#check-uniqlo').change(function() {
 
 <article>
     <% @products.take(30).each do |product| %>
-        <% content_tag(:div, class: [ product.category, product.brand ]) %>
+        <% content_tag(:div, class: [ product.section, product.brand ]) %>
         <div class="square">
             <div class="content">
                 <%= image_tag(product.picture, class: "img-responsive") %>
