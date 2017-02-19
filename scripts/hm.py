@@ -4,9 +4,9 @@ import requests
 import re
 
 def main():
-    output = "picture,price,score,link,material,name,keyword"
+    output = "picture,price,score,link,material,name,keyword,brand,gender"
     queries = ['Sweaters & Cardigans', 'Shirts', 'Jeans', 'Jackets & Coats', 'Hoodies & Sweatshirts', 'Pants', 'T-shirts & Tank tops', 'Basics', 'Jackets & Suits', 'Accessories', 'Shoes', 'Underwear & Loungewear', 'Sportswear', 'Swimwear', 'Shorts', 'Casual', 'Divided', 'H&M Man', 'Modern Classics']
-    output = "picture,price,score,link,material,name,keyword,brand"
+    output = "picture,price,score,link,material,name,keyword,brand,gender"
     for q in queries:
         output += query(q)
     f = open('hm.csv','w',errors='ignore')
@@ -53,6 +53,11 @@ def parse_item(url,keyword):
     row += name + ","
     row += keyword+"," #keywords
     row += "hm," #brand
+    gender_start = HTML.find('<a href="http://www.hm.com/us/department/') + 41
+    gender_end = HTML.find('</a>',gender_start)
+    gender = HTML[gender_start:gender_end]
+    gender = gender[:gender.find('"')]
+    row += gender+","
     print("processed " + name)
     return row
 
