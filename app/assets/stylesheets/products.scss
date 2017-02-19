@@ -143,3 +143,20 @@ input[type=number]::-webkit-outer-spin-button {
 .square .content #price {
     font-weight: 900;
 }
+
+.good-score,
+.bad-score {
+    font-weight: 900;
+}
+
+.good-score {
+    color: green;
+}
+
+.ok-score {
+    color: yellow;
+}
+
+.bad-score {
+    color: red;
+}

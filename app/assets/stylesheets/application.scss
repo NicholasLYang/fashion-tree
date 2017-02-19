@@ -99,6 +99,7 @@ $colHighlight: #000;
                 font-size: 15px;
                 &:hover, &:focus {
                     color: $colHighlight;
+                    cursor: pointer;
                 }
             }
         }
@@ -185,7 +186,7 @@ h2:hover {
 }
 .navbar-collapse {
     transition-duration: .4s;
-    max-height: 55px;
+    max-height: 54px !important;
 }
 .navbar-collapse:hover {
     background-color: #fff;
