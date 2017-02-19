@@ -47,6 +47,7 @@ def parse_item(url,keyword):
     materials = material.split(', ')
     try:
         score = score_calculator.main(materials)
+
     except:
         score = 10.98 # metal
     row += str(score) + ","
