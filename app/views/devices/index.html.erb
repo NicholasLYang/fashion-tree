@@ -1,19 +1,165 @@
-<p id="notice"><%= notice %></p>
-<div class="body">
-<div class="header">
-  <h1>Electronics</h1>
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet">
+<style>
+.navbar-collapse {
+    max-height: 54px !important;
+    background: #fff;
+}
+</style>
+<body>
+
+<div class="container">
+
+<br><br>
+<div class="left">
+    <p class="section-head">Category</p>
+    <label class="control control--checkbox">Men
+        <input id="check-men" type="checkbox"/>
+        <div class="control__indicator"></div>
+    </label>
+    <label class="control control--checkbox">Women
+        <input id="check-women" type="checkbox"/>
+        <div class="control__indicator"></div>
+    </label>
+    <label class="control control--checkbox">Kids
+        <input id="check-kids" type="checkbox"/>
+        <div class="control__indicator"></div>
+    </label>
+
+    <p class="section-head section-price">Price</p>
+    <center>
+        <span class="price-input">$<input id="check-price-min" class="price-min" type="number" placeholder="Min"></span>
+        <span class="price-input">$<input id="check-price-min" class="price-max" type="number" placeholder="Max"></span>
+    </center>
+<br>
+    <p class="section-head">Brand</p>
+    <label class="control control--checkbox">
+        Acer
+        <input id="check-acer" type="checkbox"/>
+        <div class="control__indicator"></div>
+    </label>
+    <label class="control control--checkbox">
+        Apple
+        <input id="check-apple" type="checkbox"/>
+        <div class="control__indicator"></div>
+    </label>
+    <label class="control control--checkbox">
+        Asus
+        <input id="check-asus" type="checkbox"/>
+        <div class="control__indicator"></div>
+    </label>
+    <label class="control control--checkbox">
+        HP
+        <input id="check-hp" type="checkbox"/>
+        <div class="control__indicator"></div>
+    </label>
+    <label class="control control--checkbox">
+        Microsoft
+        <input id="check-msi" type="checkbox"/>
+        <div class="control__indicator"></div>
+    </label>
+    <label class="control control--checkbox">
+        Samsung
+        <input id="check-samsung" type="checkbox"/>
+        <div class="control__indicator"></div>
+    </label>
+    <label class="control control--checkbox">
+        Sony
+        <input id="check-sony" type="checkbox"/>
+        <div class="control__indicator"></div>
+    </label>
 </div>
-<% @devices.each do |device| %>
-<div class="square">
-  <div class="content">
-      <div class="hovereffect">
-        <%= image_tag("https://" + device.picture, class: "img-responsive") %>
-        <div class="overlay">
-           <h2><%= device.name.truncate(18, omission: "...") %></h2>
-           <%= link_to 'More', device, class: 'info' %>
+
+<article>
+    <% @devices.each do |device| %>
+
+    <div class="square">
+        <div class="content">
+            <%= image_tag(device.picture, class: "img-responsive") %>
+            <h2>device.brand</h2>
+            <p>device.name</p>
+            <p id="price">$<%= device.price %></p>
         </div>
-      </div>
-  </div>
+    </div>
+    <!--
+        <% content_tag(:div, class: [ "card-" + product.section, "card-" + product.brand ]) %>
+        <div class="square">
+            <div class="content">
+                <%= image_tag(product.picture, class: "img-responsive") %>
+                <h2><%= product.brand %></h2>
+                <p><%= product.name %></p>
+                <p id="price">$<%= product.price %></p>
+
+                <% if product.score < 10.0 %>
+                    <p class="good-score">product.score</p>
+                <% elsif product.score < 100.0 %>
+                    <p class="ok-score">product.score</p>
+                <% else %>
+                    <p class="bad-score">product.score</p>
+                <% end %>
+            </div>
+        </div>-->
+    <% end %>
+</article>
+
 </div>
-<% end %>
-</div>
+
+<script>
+$('#check-acer').change(function() {
+    if ($('#check-acer').is(':checked')) {
+        $('.card-acer').show();
+    } else {
+        $('.card-acer').hide();
+    }
+});
+$('#check-apple').change(function() {
+    if ($('#check-apple').is(':checked')) {
+        $('.card-apple').show();
+    } else {
+        $('.card-apple').hide();
+    }
+});
+$('#check-asus').change(function() {
+    if ($('#check-asus').is(':checked')) {
+        $('.card-asus').show();
+    } else {
+        $('.card-asus').hide();
+    }
+});
+$('#check-hp').change(function() {
+    if ($('#check-hp').is(':checked')) {
+        $('.card-hp').show();
+    } else {
+        $('.card-hp').hide();
+    }
+});
+$('#check-msi').change(function() {
+    if ($('#check-msi').is(':checked')) {
+        $('.card-msi').show();
+    } else {
+        $('.card-msi').hide();
+    }
+});
+$('#check-samsung').change(function() {
+    if ($('#check-samsung').is(':checked')) {
+        $('.card-samsung').show();
+    } else {
+        $('.card-samsung').hide();
+    }
+});
+$('#check-sony').change(function() {
+    if ($('#check-sony').is(':checked')) {
+        $('.card-sony').show();
+    } else {
+        $('.card-sony').hide();
+    }
+});
+$('#check-toshiba').change(function() {
+    if ($('#check-toshiba').is(':checked')) {
+        $('.card-toshiba').show();
+    } else {
+        $('.card-toshiba').hide();
+    }
+});
+</script>
+
+</body>

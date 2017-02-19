@@ -44,6 +44,8 @@
         <input id="check-uniqlo" type="checkbox"/>
         <div class="control__indicator"></div>
     </label>
+    <p class="section-head">Sort By</p>
+    radio button: environmental score, see phone & slacks
 </div>
 <script>
 $('#check-men').change(function() {
@@ -92,7 +94,7 @@ $('#check-uniqlo').change(function() {
 
 <article>
     <% @products.take(30).each do |product| %>
-        <% content_tag(:div, class: [ product.section, product.brand ]) %>
+        <% content_tag(:div, class: [ "card-" + product.section, "card-" + product.brand ]) %>
         <div class="square">
             <div class="content">
                 <%= image_tag(product.picture, class: "img-responsive") %>

@@ -25,13 +25,25 @@ def main():
 def query(key):    
 	url = "https://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=" + key.replace(" ","+") + "&N=-1&isNodeId=1"
 	soup = header(url)
-    links = soup.find_all('a', {'class': 'item-title'})
-    output = ""
-    for link in links:
-        output += "\n" + parse_item(link.get('href'))
-        output += key
-    print("-----COMPLETED " + key)
-    return output
+	links = soup.find_all('a', {'class': 'item-title'})
+	output = ""
+	for link in links:
+		output += "\n" + parse_item(link.get('href'))
+		output += key
+		print("-----COMPLETED " + key)
+	return output
+
+def find_wattage(battery, life):
+	p = re.compile(r"[0-9]*(?= WH)")
+	q = re.compile(r"[0-9]*(?=[ -]watt)")
+	a = re.compile(r"[0-9]*(?= Hour)")
+	if p.search(battery) and a.search(life):
+		watt = int(int(re.findall(p,battery)[0])/int(re.findall(a,life)[0]))
+		return watt
+	elif q.search(battery):
+		return re.findall(r,battery)[0]
+	else:
+		return 0
 
 def parse_item(url):
     soup = header(url)
@@ -41,10 +53,11 @@ def parse_item(url):
     span = soup.find('span', {'class' : 'mainSlide'})
     if span :
         src = span.findChildren()[0].get('src')
-        row += src + ","
+        row += src[2:] + ","
     else:
         row += ","
 
+    '''
     # price
     if soup.find('div', {'class' : 'price-current'}):
         p = soup.find('div', {'class' : 'price-current'}).text
@@ -53,12 +66,24 @@ def parse_item(url):
     q = re.compile("\d+\.\d+")
     price = q.findall(p)[0]
     row += price + ","
-
+	'''
     # link
     row += url + ","
-
-    # material and score
-    div2 = soup.find('div', {'class' : 'product-details-and-care'})
+    
+    # wattage and score
+    w = soup.find_all('h3', {'class' : 'specTitle'})
+	wat = 0
+	for watt in w:
+		if watt.text == 'Power':
+			battery = watt.find_next_sibling().find_next_sibling()
+			battery_life = battery.find_next_sibling()
+			wat = find_Wattage(str(battery),str(battery_life))	
+			if wat == 0
+				row += ",,"
+		return msg
+	else: 
+		score = str((int(wat) * -1.25) + 100)
+		msg += score + str(wat) + ","
     r = re.compile("\d+\%")
     ul = div2.findChildren()[0].find_next_sibling()
     m = ul.find('li', {'data-reactid' : r})
@@ -68,6 +93,7 @@ def parse_item(url):
     else:
         row += ",,"
 
+    '''
     # name
     section = soup.find('section', {'class' : 'np-product-title'})
     name = section.findChildren()[0].text
@@ -83,6 +109,7 @@ def parse_item(url):
     data = section.findChildren()
     row += "Nordstorm,"
     print("processing" + name)
+    '''
     return row
 
 parse_item('https://www.newegg.com/Product/Product.aspx?Item=N82E16834332305&cm_re=lenovo_laptop-_-34-332-305-_-Product')
@@ -104,22 +131,6 @@ def main(key):
 		O += key + "/n"
 		i += 1
 	return O
-
-def find_Wattage(battery, life):
-	p = re.compile(r"[0-9]*(?= WH)")
-	q = re.compile(r"[0-9]*(?= mAh)")
-	r = re.compile(r"[0-9]*(?=[ -]watt)")
-	a = re.compile(r"[0-9]*(?= Hour)")
-	if p.search(battery) and a.search(life):
-		watt = int(int(re.findall(p,battery)[0])/int(re.findall(a,life)[0]))
-		return watt
-	elif q.search(battery) and a.search(life):
-		watt = int(int(re.findall(q,battery)[0])/int(re.findall(a,life)[0]))
-		return watt
-	elif r.search(battery):
-		return re.findall(r,battery)[0]
-	else:
-		return "Cannot compute wattage!"
 
 
 def parse_item(url):
