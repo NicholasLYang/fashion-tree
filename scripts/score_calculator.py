@@ -28,4 +28,13 @@ def read_materials(materials):
     out = map(lambda s: s.split(" "), materials)
     return list(out)
 
-def 
+def normalize_materials(materials):
+    factor = 1.0/sum(materials)
+    for key in materials_dict:
+        materials_dict[key] = materials_dict[key] * factor
+
+def calculate_score(materials):
+    
+    for fabric, percentage in materials:
+        fabric = fabric.lower()
+        a * water_consumption[fabric] + b * energy_consumption[fabric]
