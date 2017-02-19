@@ -30,24 +30,21 @@ def read_materials(materials):
     return list(out)
 
 def calculate_score(materials):
-    print(materials)
     p1 = float(read_materials(materials)[0][0].replace("%",""))/100
     f1 = read_materials(materials)[0][1].lower()
     if len(eval(materials)) == 1:
         score = .5 * water_consumption[f1] + .5 * energy_consumption[f1]
-        score = score * .9
-        print(score)
+        score = score * .7
     elif len(eval(materials)) == 2:
         f2 = eval(materials)[1].split(" ")[1].lower()
         p2 = float(read_materials(materials)[1][0].replace("%",""))
         score = .25 * water_consumption[f1] + .25 * energy_consumption[f1] + .25 * water_consumption[f2] + .25 * energy_consumption[f2]
-        score = score * .9
-        print(score)
+        score = score * .7
     elif len(eval(materials)) == 3:
         f2 = eval(materials)[1].split(" ")[1].lower()
         p2 = float(read_materials(materials)[1][0].replace("%",""))
         f3 = eval(materials)[2].split(" ")[1].lower()
         p3 = float(read_materials(materials)[2][0].replace("%",""))
         score = (1/6) * water_consumption[f1] + (1/6) * energy_consumption[f1] + (1/6) * water_consumption[f2] + (1/6) * energy_consumption[f2] + (1/6) * water_consumption[f3] + (1/6) * energy_consumption[f3]
-        score = score * .9
-        print(score)
+        score = score * .7
+

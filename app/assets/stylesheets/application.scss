@@ -17,6 +17,24 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+* {
+    font-family: 'Lato';
+}
+.image-text {
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 20%;
+    width: 100%;
+    color: white;
+}
+.image-title {
+    font-weight: lighter;
+    font-size: 8em;
+}
+.lead {
+    font-size: 22px !important;
+}
 
 .image-text {
     left: 0;
@@ -31,9 +49,11 @@
     font-weight: lighter;
     font-size: 8em;
 }
-.lead {
-    font-size: 3em;
-    font-weight: lighter;
+
+.body {
+    margin-top: 10%;
+    margin-left: 10%;
+    margin-bottom: 15%;
 }
 
 .text-box {
@@ -41,121 +61,7 @@
     padding-top: 40px;
     padding-bottom: 50px;
     font-size: 1.5em;
-
 }
-
-
-
-.square {
-    float:left;
-    position: relative;
-    width: 30%;
-    padding-bottom: 30%; /* = width for a 1:1 aspect ratio */
-    margin: 0.5%;
-    overflow:hidden;
-}
-
-.content {
-    position:absolute;
-    height:100%; /* = 100% - 2*10% padding */
-    width:80%; /* = 100% - 2*5% padding */
-    padding: 10% 5%;
-}
-
-.body {
-    margin-top: 10%;
-    margin-left: 10%;
-}
-
-
-.hovereffect {
-width: 90%;
-height: 80%;
-float:left;
-overflow:hidden;
-position:relative;
-text-align:center;
-cursor:default;
-}
-
-.hovereffect .overlay {
-width:100%;
-height:100%;
-position:absolute;
-overflow:hidden;
-top:0;
-left:0;
-opacity:0;
-background-color:rgba(0,0,0,0.5);
--webkit-transition:all .4s ease-in-out;
-transition:all .4s ease-in-out
-}
-
-.hovereffect img {
-display:block;
-position:relative;
--webkit-transition:all .4s linear;
-transition:all .4s linear;
-}
-
-.hovereffect h2 {
-text-transform:uppercase;
-color:#fff;
-text-align:center;
-position:relative;
-font-size:17px;
-background:rgba(0,0,0,0.6);
--webkit-transform:translatey(-100px);
--ms-transform:translatey(-100px);
-transform:translatey(-100px);
--webkit-transition:all .2s ease-in-out;
-transition:all .2s ease-in-out;
-padding:10px;
-}
-
-.hovereffect a.info {
-text-decoration:none;
-display:inline-block;
-text-transform:uppercase;
-color:#fff;
-border:1px solid #fff;
-background-color:transparent;
-opacity:0;
-filter:alpha(opacity=0);
--webkit-transition:all .2s ease-in-out;
-transition:all .2s ease-in-out;
-margin:50px 0 0;
-padding:7px 14px;
-}
-
-.hovereffect a.info:hover {
-box-shadow:0 0 5px #fff;
-}
-
-.hovereffect:hover img {
--ms-transform:scale(1.2);
--webkit-transform:scale(1.2);
-transform:scale(1.2);
-}
-
-.hovereffect:hover .overlay {
-opacity:1;
-filter:alpha(opacity=100);
-}
-
-.hovereffect:hover h2,.hovereffect:hover a.info {
-opacity:1;
-filter:alpha(opacity=100);
--ms-transform:translatey(0);
--webkit-transform:translatey(0);
-transform:translatey(0);
-}
-
-.hovereffect:hover a.info {
--webkit-transition-delay:.2s;
-transition-delay:.2s;
-}
-
 .products {
     margin-top: 10%;
     margin-left: 4%;
@@ -164,73 +70,116 @@ transition-delay:.2s;
     margin-bottom: 100px;
 }
 
+$bgDefault: transparent;
+$bgHighlight: #fff;
+$colDefault: #000;
+$colHighlight: #000;
 
-
-$bgDefault      : #af473c;
-$bgHighlight    : #945d60;
-$colDefault     : #ecf0f1;
-$colHighlight   : #ffffff;
-$dropDown       : false;
+.navbar {
+    height: 71px;
+}
 .navbar-default {
-  background-color: $bgDefault;
-  border-color: $bgHighlight;
-  .navbar-brand {
-    color: $colDefault;
-    &:hover, &:focus {
-      color: $colHighlight; }}
-  .navbar-text {
-    color: $colDefault; }
-  .navbar-nav {
-    > li {
-      > a {
+    transform: translateY(-20px);
+    background-color: $bgDefault;
+    border-color: $bgDefault;
+    .navbar-brand {
         color: $colDefault;
-        &:hover,  &:focus {
-          color: $colHighlight; }}
-      @if $dropDown {
-        > .dropdown-menu {
-          background-color: $bgDefault;
-          > li {
+        &:hover, &:focus {
+            color: $colHighlight;
+        }
+    }
+    .navbar-text {
+        transition-duration: .3s;
+        color: $colDefault;
+    }
+    .navbar-nav {
+        > li {
             > a {
-              color: $colDefault;
-              &:hover,  &:focus {
+                color: $colDefault;
+                font-size: 15px;
+                &:hover, &:focus {
+                    color: $colHighlight;
+                }
+            }
+        }
+        > .active {
+            > a, > a:hover, > a:focus {
                 color: $colHighlight;
-                background-color: $bgHighlight; }}
-            > .divider {
-              background-color: $bgHighlight;}}}}}
-    @if $dropDown {
-      .open .dropdown-menu > .active {
-        > a, > a:hover, > a:focus {
-          color: $colHighlight;
-          background-color: $bgHighlight; }}}
-    > .active {
-      > a, > a:hover, > a:focus {
-        color: $colHighlight;
-        background-color: $bgHighlight; }}
-    > .open {
-      > a, > a:hover, > a:focus {
-        color: $colHighlight;
-        background-color: $bgHighlight; }}}
-  .navbar-toggle {
-    border-color: $bgHighlight;
-    &:hover, &:focus {
-      background-color: $bgHighlight; }
-    .icon-bar {
-      background-color: $colDefault; }}
-  .navbar-collapse,
-  .navbar-form {
-    border-color: $colDefault; }
-  .navbar-link {
-    color: $colDefault;
-    &:hover {
-      color: $colHighlight; }}}
-@media (max-width: 767px) {
-  .navbar-default .navbar-nav .open .dropdown-menu {
-    > li > a {
-      color: $colDefault;
-      &:hover, &:focus {
-        color: $colHighlight; }}
-    > .active {
-      > a, > a:hover, > a:focus {
-        color: $colHighlight;
-        background-color: $bgHighlight; }}}
+                background-color: $bgHighlight;
+            }
+        }
+        > .open {
+            > a, > a:hover, > a:focus {
+                color: $colHighlight;
+                background-color: $bgHighlight;
+            }
+        }
+    }
+    .navbar-toggle {
+        border-color: $bgHighlight;
+        &:hover, &:focus {
+            background-color: $bgHighlight;
+        }
+        .icon-bar {
+            background-color: $colDefault;
+        }
+    }
+    .navbar-collapse,
+    .navbar-form {
+        border-color: $colDefault;
+    }
+    .container, .navbar-header {
+        display: inline;
+    }
+}
+
+ul {
+    display: inline;
+    list-style: none;
+}
+
+li {
+    display: inline;
+}
+
+.navbar-brand {
+    font-size: 24px;
+}
+
+.navbar-header {
+    text-align: center;
+    display: block;
+    position: relative;
+    left: 24%;
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: 0.02em;
+}
+
+.lead {
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: 0.02em;
+    color: #000;
+    position: relative;
+}
+h2 {
+    color: #000;
+    text-transform: none;
+    font-size: 40pt;
+    transform: translateY(-20px);
+}
+
+h2:hover {
+    color: #000;
+    cursor: pointer;
+}
+
+.navbar-left {
+    margin-left: 40px;
+}
+
+.navbar-right {
+    position: relative;
+    right: 40px;
 }
