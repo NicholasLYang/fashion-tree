@@ -1,3 +1,4 @@
+import csv
 energy_consumption = {
        'cotton': 49,
        'wool': 8,
@@ -28,13 +29,25 @@ def read_materials(materials):
     out = map(lambda s: s.split(" "), materials)
     return list(out)
 
-def normalize_materials(materials):
-    factor = 1.0/sum(materials)
-    for key in materials_dict:
-        materials_dict[key] = materials_dict[key] * factor
-
 def calculate_score(materials):
-    
-    for fabric, percentage in materials:
-        fabric = fabric.lower()
-        a * water_consumption[fabric] + b * energy_consumption[fabric]
+    print(materials)
+    p1 = float(read_materials(materials)[0][0].replace("%",""))/100
+    f1 = read_materials(materials)[0][1].lower()
+    if len(eval(materials)) == 1:
+        score = .5 * water_consumption[f1] + .5 * energy_consumption[f1]
+        score = score * .9
+        print(score)
+    elif len(eval(materials)) == 2:
+        f2 = eval(materials)[1].split(" ")[1].lower()
+        p2 = float(read_materials(materials)[1][0].replace("%",""))
+        score = .25 * water_consumption[f1] + .25 * energy_consumption[f1] + .25 * water_consumption[f2] + .25 * energy_consumption[f2]
+        score = score * .9
+        print(score)
+    elif len(eval(materials)) == 3:
+        f2 = eval(materials)[1].split(" ")[1].lower()
+        p2 = float(read_materials(materials)[1][0].replace("%",""))
+        f3 = eval(materials)[2].split(" ")[1].lower()
+        p3 = float(read_materials(materials)[2][0].replace("%",""))
+        score = (1/6) * water_consumption[f1] + (1/6) * energy_consumption[f1] + (1/6) * water_consumption[f2] + (1/6) * energy_consumption[f2] + (1/6) * water_consumption[f3] + (1/6) * energy_consumption[f3]
+        score = score * .9
+        print(score)
