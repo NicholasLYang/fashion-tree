@@ -20,6 +20,7 @@
 * {
     font-family: 'Lato';
 }
+
 .image-text {
     left: 0;
     position: absolute;
@@ -190,58 +191,4 @@ h2:hover {
 }
 .navbar-collapse:hover {
     background-color: #fff;
-}
-
-.modal {
-    position: absolute;
-    display: none;
-    width: 340px;
-    height: 450px;
-    background: #fff;
-}
-
-/* Modal Content */
-.modal-content {
-    background-color: #fff;
-    margin: auto;
-}
-
-#prod-image{
-    position: relative;
-    width: 90%;
-    height: auto;
-    background: #fff;
-    margin: 0;
-    padding: 0;
-}
-
-#prod-image>img{
-    left: 0;
-    top: 0;
-    width: inherit;
-}
-table {
-    border-collapse: collapse;
-}
-tr {
-    padding: 0;
-}
-
-td {
-    width: 50%;
-    vertical-align: top;
-    padding: 5px;
-    border: 1px solid gray;
-    margin: 0;
-}
-
-#buy {
-    display: block;
-    background: #000;
-    color: #fff;
-    padding: 10px;
-    font-size: 14px;
-float:right;    font-family: 'Lato';
-    border: none;
-    margin: 10px;
 }
