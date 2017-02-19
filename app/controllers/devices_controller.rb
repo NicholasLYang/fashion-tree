@@ -4,7 +4,7 @@ class DevicesController < ApplicationController
   # GET /devices
   # GET /devices.json
   def index
-    @devices = Device.all
+    @devices = Device.order("RANDOM()").limit(30)
   end
 
   # GET /devices/1

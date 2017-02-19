@@ -92,11 +92,11 @@ $('#check-uniqlo').change(function() {
 </script>
 
 <article>
-    <% @products.each do |product| %>
+    <% @products.take(30).each do |product| %>
         <% content_tag(:div, class: "strong") %>
         <div class="square">
             <div class="content">
-                <%= image_tag("https://" + product.picture, class: "img-responsive") %>
+                <%= image_tag(product.picture, class: "img-responsive") %>
                 <h2>UNIQLO</h2>
                 <p><%= product.name %></p>
                 <p id="price">$<%= product.price %></p>
