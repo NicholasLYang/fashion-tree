@@ -16,6 +16,10 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+* {
+    font-family: 'Lato';
+}
 .image-text {
     left: 0;
     position: absolute;
@@ -29,8 +33,7 @@
     font-size: 8em;
 }
 .lead {
-    font-size: 3em;
-    font-weight: lighter;
+    font-size: 22px !important;
 }
 
 .image-text {
@@ -45,10 +48,6 @@
 .image-title {
     font-weight: lighter;
     font-size: 8em;
-}
-.lead {
-    font-size: 3em;
-    font-weight: lighter;
 }
 
 .body {
@@ -71,14 +70,18 @@
     margin-bottom: 100px;
 }
 
-$bgDefault: #fff;
+$bgDefault: transparent;
 $bgHighlight: #fff;
 $colDefault: #000;
-$colHighlight: #aaa;
-/*LIST STYLE TYPE NOT TEXT DECORATION*/
+$colHighlight: #000;
+
+.navbar {
+    height: 71px;
+}
 .navbar-default {
+    transform: translateY(-20px);
     background-color: $bgDefault;
-    border-color: $bgHighlight;
+    border-color: $bgDefault;
     .navbar-brand {
         color: $colDefault;
         &:hover, &:focus {
@@ -93,6 +96,7 @@ $colHighlight: #aaa;
         > li {
             > a {
                 color: $colDefault;
+                font-size: 15px;
                 &:hover, &:focus {
                     color: $colHighlight;
                 }
@@ -124,7 +128,58 @@ $colHighlight: #aaa;
     .navbar-form {
         border-color: $colDefault;
     }
-    .navbar-collapse, .header {
+    .container, .navbar-header {
         display: inline;
     }
+}
+
+ul {
+    display: inline;
+    list-style: none;
+}
+
+li {
+    display: inline;
+}
+
+.navbar-brand {
+    font-size: 24px;
+}
+
+.navbar-header {
+    text-align: center;
+    display: block;
+    position: relative;
+    left: 24%;
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: 0.02em;
+}
+
+.lead {
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: 0.02em;
+    color: #000;
+    position: relative;
+}
+h2 {
+    color: #000;
+    text-transform: none;
+    font-size: 40pt;
+    transform: translateY(-20px);
+}
+
+h2:hover {
+    color: #000;
+    cursor: pointer;
+}
+
+.navbar-left {
+    margin-left: 40px;
+}
+
+.navbar-right {
+    position: relative;
+    right: 40px;
 }
