@@ -188,7 +188,7 @@ $('#check-uniqlo').change(function() {
                 <p id="price">$<%= product.price %></p>
                 <% if product.score == 0 %>
                     <p class="bad-score">98</p>
-                <% elsif product.score < 12.0 %>
+                <% elsif product.score < 20.0 %>
                     <p class="good-score"><%= product.score %></p>
                 <% elsif product.score < 70.0 %>
                     <p class="ok-score"><%= product.score  %></p>
