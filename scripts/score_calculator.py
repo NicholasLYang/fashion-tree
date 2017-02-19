@@ -34,7 +34,6 @@ def normalize_materials(materials):
         materials_dict[key] = materials_dict[key] * factor
 
 def calculate_score(materials):
-    
     for fabric, percentage in materials:
         fabric = fabric.lower()
         a * water_consumption[fabric] + b * energy_consumption[fabric]

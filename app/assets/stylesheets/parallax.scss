@@ -9,9 +9,6 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
-div:hover {
-    backdrop-filter: blur(10px)
-}
 
 .parallax-img {
     background-image: image-url("fashion-background-large.jpg");
@@ -26,6 +23,12 @@ div:hover {
 
 .parallax-img-3 {
     background-image: image-url("fashion-background-large-2.jpg");
+    @extend .parallax
+}
+
+.parallax-img-4 {
+    background-image: image-url("electronics-background-large-2.jpg");
+    height: 250px;
     @extend .parallax
 }
 
