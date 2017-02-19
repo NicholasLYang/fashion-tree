@@ -3,6 +3,7 @@ import urllib.request
 import requests
 import re
 import csv
+import score_calculator
 search_uri = "https://www.uniqlo.com/us/en/search/?q=%s&lang=default"
 # This is the generic search uri
 
@@ -75,7 +76,9 @@ def parse_pages(keyword):
         if product == None:
             continue
         product['keyword'] = keyword
-        output.append(product)
+        product['score'] = score_calculator.main(product['materials'])
+        if product['score'] != None:
+            output.append(product)
     return output
 
 

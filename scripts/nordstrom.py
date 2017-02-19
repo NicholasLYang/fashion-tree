@@ -13,9 +13,9 @@ def header(url):
     return soup
 
 def main():
-    output = "picture,price,link,material,score,name,category,brand,keyword"
+    output = "picture,price,link,material,score,name,section,brand,keyword"
     queries = ['Sweaters & Cardigans', 'Shirts', 'Jeans', 'Jackets & Coats', 'Hoodies & Sweatshirts', 'Pants', 'T-shirts & Tank tops', 'Basics', 'Jackets & Suits', 'Accessories', 'Shoes', 'Underwear & Loungewear', 'Sportswear', 'Swimwear', 'Shorts', 'Casual', 'Divided', 'H&M Man', 'Modern Classics']
-    output = "picture,price,link,material,score,name,category,brand,keyword"
+    output = "picture,price,link,material,score,name,section,brand,keyword"
     for key in queries:
         output += query(key)
     f = open('nordstrom.csv','w',errors='ignore')
@@ -24,7 +24,7 @@ def main():
 
 
 def query(key):    
-    url = "http://shop.nordstrom.com/sr?contextualcategoryid=60137519&origin=keywordsearch&keyword=" + key.replace(" ","+")
+    url = "http://shop.nordstrom.com/sr?contextualsectionid=60137519&origin=keywordsearch&keyword=" + key.replace(" ","+")
     soup = header(url)
     links = soup.find_all('a', {'class': 'product-href'})
     output = ""
@@ -74,10 +74,10 @@ def parse_item(url):
     name = section.findChildren()[0].text
     row += name + ","
 
-    # category
+    # section
     li = soup.find('li', {'data-element' : 'item_1'})
-    category = li.findChildren()[0].text
-    row += category + ","
+    section = li.findChildren()[0].text
+    row += section + ","
 
     # brand
     section = soup.find('section', {'class' : 'brand-title'})

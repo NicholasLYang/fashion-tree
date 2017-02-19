@@ -33,6 +33,7 @@ def parse_item(url,keyword):
     # picture
     image_start = HTML.find('lp.hm.com')
     image = HTML[image_start:HTML.find('"',image_start)]
+    image = "https://" + image
     if "," in image:
         row += '"' + image + '",'
     else:
@@ -45,7 +46,7 @@ def parse_item(url,keyword):
     material = HTML[material_start:HTML.find('.',material_start)].replace('metallic fiber','metallic-fiber')
     materials = material.split(', ')
     try:
-        score = score_calculator.calculate_score(score_calculator.read_materials(materials))
+        score = score_calculator.main(materials)
     except:
         score = 10.98 # metal
     row += str(score) + ","
