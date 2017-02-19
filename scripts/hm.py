@@ -70,10 +70,14 @@ def parse_item(url,keyword):
     if section == "Sale":
         section = ul.findChildren()[4].text.replace('/','').strip()
     section = section[:section.find('"')]
+    if section in ["WOME","ME"]:
+        section += "N"
+    if section == "KID":
+        section += "S"
     row += section.lower() + ","
     # brand
-    row += "h&m,"
-    print("processed " + name)
+    row += "hm,"
+
     return row
 
 def make_soup(url):
