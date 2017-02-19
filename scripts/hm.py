@@ -62,14 +62,21 @@ def parse_item(url,keyword):
     # keywords
     row += keyword + ","
     # section
-    section_start = HTML.find('<a href="http://www.hm.com/us/department/') + 41
-    section_end = HTML.find('</a>',section_start)
-    section = HTML[section_start:section_end]
+    soup = make_soup(url)
+    ul = soup.find('ul',{'class':'breadcrumbs'})
+    section = ul.findChildren()[2].text.replace('/','').strip()
+    if section == "Sale":
+        section = ul.findChildren()[4].text.replace('/','').strip()
     section = section[:section.find('"')]
-    row += section + ","
+    row += section.lower() + ","
     # brand
     row += "h&m,"
     print("processed " + name)
     return row
+
+def make_soup(url):
+    r = requests.get(url)
+    soup = BeautifulSoup(r.content, "html.parser")
+    return soup
 
 main()

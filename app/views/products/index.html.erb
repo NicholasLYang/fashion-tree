@@ -97,12 +97,12 @@ $('#check-uniqlo').change(function() {
         <div class="square <%= 'card-' + product.section.downcase %> <%= 'card-' + product.brand.downcase %>">
             <div class="content">
                 <%= link_to product.link do %>
-                <%= image_tag(product.picture, class: "img-responsive") %>
+                    <%= image_tag(product.picture, class: "img-responsive") %>
                 <% end %>
                 <p class="product-brand"><%= product.brand %></p>
                 <p><%= product.name %></p>
                 <p id="price">$<%= product.price %></p>
-                <% if product.score < 10.0 %>
+                <% if product.score < 12.0 %>
                     <p class="good-score"><%= product.score %></p>
                 <% elsif product.score < 100.0 %>
                     <p class="ok-score"><%= product.score  %></p>
