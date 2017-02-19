@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import urllib.request
 import requests
 import re
-import score_calculator
+import score_calculator as sc
 
 def header(url):
     headers = {
@@ -65,7 +65,8 @@ def parse_item(url):
     m = ul.find('li', {'data-reactid' : r})
     if m:
         material = m.text
-        row += material.replace(',',' ') + "," + str(computeScore(material)) + ","
+        row += material.replace(',',' ') + "," + str(sc.calculate_score(material)) + ","
+        print(sc.calculate_score(material))
     else:
         row += ",,"
 

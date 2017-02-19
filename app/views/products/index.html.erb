@@ -9,6 +9,34 @@
 
 <div class="container">
 
+<div class="modal">
+    <div class="modal-content">
+    <h2 class="title"><%= product.name product.price %></h2>
+    <div id="prod-image">
+       <%= image_tag(product.picture, class: "img-modal") %>
+    </div>
+    <table>
+        <tr>
+            <td>
+             flexible washed superstretch denim for added freedom of movement. Elasticized waistband, mock front pockets, and regular back pockets. 60% cotton, 38% polyester, 2% spandex.
+            </td>
+            <td>
+            <p class="green-index">Green Index:<br>
+                <%= product.score %>
+            </p>
+            </td>
+        </tr>
+    </table>
+
+    <button id="buy">Shop Now</button>
+    <script>
+    $('#buy').on('click', function() {
+        $('.modal').show();
+    }
+    </script>
+  </div>
+
+</div>
 <br><br>
 <div class="left">
     <p class="section-head">Category</p>
