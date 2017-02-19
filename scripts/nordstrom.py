@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import urllib.request
 import requests
 import re
+import score_calculator
 
 def header(url):
     headers = {
@@ -12,9 +13,9 @@ def header(url):
     return soup
 
 def main():
-    output = "picture,price,score,link,material,name,keyword"
+    output = "picture,price,link,material,score,name,category,brand,keyword"
     queries = ['Sweaters & Cardigans', 'Shirts', 'Jeans', 'Jackets & Coats', 'Hoodies & Sweatshirts', 'Pants', 'T-shirts & Tank tops', 'Basics', 'Jackets & Suits', 'Accessories', 'Shoes', 'Underwear & Loungewear', 'Sportswear', 'Swimwear', 'Shorts', 'Casual', 'Divided', 'H&M Man', 'Modern Classics']
-    output = "picture,price,score,link,material,name,category,keyword"
+    output = "picture,price,link,material,score,name,category,brand,keyword"
     for key in queries:
         output += query(key)
     f = open('nordstrom.csv','w',errors='ignore')
@@ -29,7 +30,7 @@ def query(key):
     output = ""
     for link in links:
         output += "\n" + parse_item("https://nordstrom.com" + link.get('href'))
-        output += key + "\n"
+        output += key
     print("-----COMPLETED " + key)
     return output
 
@@ -43,7 +44,7 @@ def parse_item(url):
         image = div.findChildren()[0].get('src')
         row += image + ","
     else:
-        row += ",,"
+        row += ","
 
     # price
     if soup.find('div', {'class' : 'price-current'}):
@@ -54,21 +55,17 @@ def parse_item(url):
     price = q.findall(p)[0]
     row += price + ","
 
-    # score
-    score = 0
-    row += str(score) + ","
-
     # link
     row += url + ","
 
-    # material
+    # material and score
     div2 = soup.find('div', {'class' : 'product-details-and-care'})
     r = re.compile("\d+\%")
     ul = div2.findChildren()[0].find_next_sibling()
     m = ul.find('li', {'data-reactid' : r})
     if m:
         material = m.text
-        row += material + ","
+        row += material.replace(',',' ') + "," + str(computeScore(material)) + ","
     else:
         row += ",,"
 
@@ -76,15 +73,19 @@ def parse_item(url):
     section = soup.find('section', {'class' : 'np-product-title'})
     name = section.findChildren()[0].text
     row += name + ","
-    print("processing" + name)
 
     # category
     li = soup.find('li', {'data-element' : 'item_1'})
     category = li.findChildren()[0].text
     row += category + ","
+
+    # brand
+    section = soup.find('section', {'class' : 'brand-title'})
+    data = section.findChildren()
+    row += "Nordstorm,"
+    print("processing" + name)
     return row
  
-'''
 def computeScore(material):
     energy_consumption = {
         'cotton': 49,
@@ -119,5 +120,5 @@ def computeScore(material):
         except:
             score += 6.12
     return score
-'''
+
 main()
