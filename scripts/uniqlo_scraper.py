@@ -3,6 +3,7 @@ import urllib.request
 import requests
 import re
 import csv
+import score_calculator
 search_uri = "https://www.uniqlo.com/us/en/search/?q=%s&lang=default"
 # This is the generic search uri
 
@@ -36,6 +37,7 @@ def parse_product_page(product_url):
         output['price'] = scrape_product_price(product_page)
         output['section'] = scrape_section(output['name'])
         output['materials'] = scrape_materials(product_page)
+        output['brand'] = 'Uniqlo'
         return output
     except AttributeError:
         print("Whoops, out of stock")
@@ -75,7 +77,9 @@ def parse_pages(keyword):
         if product == None:
             continue
         product['keyword'] = keyword
-        output.append(product)
+        product['score'] = score_calculator.main(product['materials'])
+        if product['score'] != None:
+            output.append(product)
     return output
 
 
