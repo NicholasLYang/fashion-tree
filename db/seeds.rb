@@ -25,17 +25,20 @@ Dir.glob(Rails.root.join('lib', 'seeds', 'products', "*.csv")) do |f|
     p.save
   end
 end
-# csv_text = File.read(Rails.root.join('lib', 'seeds', 'newegg.csv'))
-# csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-# csv.each do |row|
-#   wattage = row['wattage'].to_f
-#   next if wattage == 0.0
-#   d = Device.new
-#   d.picture = row['picture']
-#   d.score = row['score']
-#   d.link = row['link']
-#   d.keyword = row['keyword']
-#   d.name = row['name']
-#   d.watts = wattage
-#   d.save
-# end
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'devices', 'newegg.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each do |row|
+  wattage = row['watts'].to_f
+  next if wattage == 0.0 || wattage == nil
+  d = Device.new
+  d.picture = row['picture']
+  d.score = row['score']
+  d.link = row['link']
+  d.keyword = row['keyword']
+  d.name = row['name']
+  d.keyword = row['keyword']
+  d.brand = row['brand']
+  d.watts = wattage
+  d.save
+end
