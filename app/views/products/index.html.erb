@@ -52,54 +52,60 @@ $('#check-men').change(function() {
     } else {
         $('.card-men').hide();
     }
-    console.log('men');
 });
 $('#check-women').change(function() {
     if ($('#check-women').is(':checked')) {
         $('.card-women').show();
     } else {
         $('.card-women').hide();
-    }console.log('wmen');
+    }
 });
 $('#check-kids').change(function() {
     if ($('#check-kids').is(':checked')) {
         $('.card-kids').show();
     } else {
         $('.card-kids').hide();
-    }console.log('kids');
+    }
 });
 $('#check-hm').change(function() {
     if ($('#check-hm').is(':checked')) {
         $('.card-hm').show();
     } else {
         $('.card-hm').hide();
-    }console.log('hm');
+    }
 });
 $('#check-nordstorm').change(function() {
     if ($('#check-nordstorm').is(':checked')) {
         $('.card-nordstorm').show();
     } else {
         $('.card-nordstorm').hide();
-    }console.log('nordstorm');
+    }
 });
 $('#check-uniqlo').change(function() {
     if ($('#check-uniqlo').is(':checked')) {
         $('.card-uniqlo').show();
     } else {
         $('.card-uniqlo').hide();
-    }console.log('uniqelo');
+    }
 });
 </script>
 
 <article>
-    <% @products.each do |product| %>
-        <% content_tag(:div, class: "strong") %>
+    <% @products.take(30).each do |product| %>
+        <% content_tag(:div, class: [ product.category, product.brand ]) %>
         <div class="square">
             <div class="content">
-                <%= image_tag("https://" + product.picture, class: "img-responsive") %>
-                <h2>UNIQLO</h2>
+                <%= image_tag(product.picture, class: "img-responsive") %>
+                <h2><%= product.brand %></h2>
                 <p><%= product.name %></p>
                 <p id="price">$<%= product.price %></p>
+                <% if product.score < 10.0 %>
+                    <p class="good-score">product.score</p>
+                <% elsif product.score < 100.0 %>
+                    <p class="ok-score">product.score</p>
+                <% else %>
+                    <p class="bad-score">product.score</p>
+                <% end %>
             </div>
         </div>
     <% end %>
