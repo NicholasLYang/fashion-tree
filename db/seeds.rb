@@ -6,21 +6,25 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'csv'
-
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'handm.csv'))
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-csv.each do |row|
-  p = Product.new
-  p.picture = row['picture']
-  p.price = row['price'][1..-1]
-  p.score = row['score']
-  p.link = row['link']
-  p.keyword = row['keyword']
-  p.name = row['name']
-  p.material = row['material']
-  p.save
+Dir.glob(Rails.root.join('lib', 'seeds', 'products', "*.csv")) do |f|
+  puts f
+  csv_text = File.read(f)
+  csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+  csv.each do |row|
+    next if row['score'] == nil
+    p = Product.new
+    p.picture = row['picture']
+    p.price = row['price'][1..-1]
+    p.score = row['score']
+    p.link = row['link']
+    p.keyword = row['keyword']
+    p.name = row['name']
+    p.material = row['material']
+    p.section = row['section']
+    p.brand = row['brand']
+    p.save
+  end
 end
-
 # csv_text = File.read(Rails.root.join('lib', 'seeds', 'newegg.csv'))
 # csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 # csv.each do |row|

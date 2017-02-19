@@ -34,6 +34,7 @@ def parse_item(url,keyword):
     
     image_start = HTML.find('lp.hm.com')
     image = HTML[image_start:HTML.find('"',image_start)]
+    image = "https://" + image
     if "," in image:
         row += '"' + image + '",'
     else:

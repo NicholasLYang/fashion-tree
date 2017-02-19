@@ -26,16 +26,23 @@ water_consumption = Counter({
 })
 
 def read_materials(materials):
-    materials = eval(materials)
     out = map(lambda s: reversed(s.split(" ")), materials)
-    return dict(list(out))
+    try:
+        return dict(list(out))
+    except ValueError:
+        return None
 
 def calculate_score(materials):
-    out = 0
+    if materials == None:
+        return None
+    out = 0.1
     for key in materials:
         val = int(materials[key][:-1])
-        out = out + (val * water_consumption[key] + val * energy_consumption[key])/2
+        out = out + (val * water_consumption[key.lower()] +
+                     val * energy_consumption[key.lower()])/2
     return (627450/out + 20)/2
 
 
+def main(materials):
+    return calculate_score(read_materials(materials))
 
