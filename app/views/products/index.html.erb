@@ -93,7 +93,7 @@ $('#check-uniqlo').change(function() {
 </script>
 
 <article>
-    <% @products.take(30).each do |product| %>
+    <% @products.take(50).each do |product| %>
         <% content_tag(:div, class: [ "card-" + product.section, "card-" + product.brand ]) %>
         <div class="square">
             <div class="content">

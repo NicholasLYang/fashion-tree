@@ -37,6 +37,7 @@ def parse_product_page(product_url):
         output['price'] = scrape_product_price(product_page)
         output['section'] = scrape_section(output['name'])
         output['materials'] = scrape_materials(product_page)
+        output['brand'] = 'Uniqlo'
         return output
     except AttributeError:
         print("Whoops, out of stock")
