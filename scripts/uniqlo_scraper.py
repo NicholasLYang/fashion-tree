@@ -77,7 +77,7 @@ def parse_pages(keyword):
         if product == None:
             continue
         product['keyword'] = keyword
-        product['score'] = score_calculator.main(product['materials'])
+        product['score'] = score_calculator.calculate_score(str(product['materials']))
         if product['score'] != None:
             output.append(product)
     return output

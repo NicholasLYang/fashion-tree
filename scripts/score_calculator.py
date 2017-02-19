@@ -45,8 +45,8 @@ def read_materials(m):
         a.append(percentage)
         if e.split(" ")[1] != 'Nothing':
             fabric = e.split(" ")[1].lower()
-        a.append(fabric)
-        materials.append(a)
+            a.append(fabric)
+            materials.append(a)
     return materials
 def calculate_score(m):
     m = read_materials(m)
