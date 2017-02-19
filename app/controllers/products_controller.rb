@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.order("RANDOM()").limit(30)
+    @products = Product.order("RANDOM()").limit(100)
   end
 
   # GET /products/1
