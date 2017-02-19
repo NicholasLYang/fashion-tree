@@ -1,19 +1,55 @@
-<p id="notice"><%= notice %></p>
-<div class="body">
-<div class="header">
-  <h1>Clothes</h1>
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet">
+
+<body>
+
+<div class="container">
+
+<br><br>
+<div class="left">
+    <p class="section-head">Category</p>
+    <label class="control control--checkbox">Men
+        <input type="checkbox" checked="checked"/>
+        <div class="control__indicator"></div>
+    </label>
+    <label class="control control--checkbox">Women
+        <input type="checkbox"/>
+        <div class="control__indicator"></div>
+    </label>
+
+    <p class="section-head section-price">Price</p>
+    <center>
+        <span class="price-input">$<input class="price-min" type="number" placeholder="Min"></span>
+        <span class="price-input">$<input class="price-max" type="number" placeholder="Max"></span>
+    </center>
+<br>
+    <p class="section-head">Brand</p>
+    <label class="control control--checkbox">H&M
+        <input type="checkbox" checked="checked"/>
+        <div class="control__indicator"></div>
+    </label>
+    <label class="control control--checkbox">Nordstorm
+        <input type="checkbox"/>
+        <div class="control__indicator"></div>
+    </label>
+    <label class="control control--checkbox">Uniqlo
+        <input type="checkbox"/>
+        <div class="control__indicator"></div>
+    </label>
 </div>
-<% @products.each do |product| %>
-<div class="square">
-  <div class="content">
-      <div class="hovereffect">
-        <%= image_tag("https://" + product.picture, class: "img-responsive") %>
-        <div class="overlay">
-           <h2><%= product.name %></h2>
-           <%= link_to 'More', product, class: 'info' %>
+
+<article>
+    <% @products.each do |product| %>
+    <div class="square">
+        <div class="content">
+            <%= image_tag("https://" + product.picture, class: "img-responsive") %>
+            <h2>UNIQLO</h2>
+            <p><%= product.name %></p>
+            <p id="price">$<%= product.price %></p>
         </div>
-      </div>
-  </div>
+    </div>
+    <% end %>
+</article>
+
 </div>
-<% end %>
-</div>
+
+</body>
