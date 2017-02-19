@@ -6,7 +6,7 @@ import re
 def main():
     output = "picture,price,score,link,material,name,keyword"
     queries = ['Sweaters & Cardigans', 'Shirts', 'Jeans', 'Jackets & Coats', 'Hoodies & Sweatshirts', 'Pants', 'T-shirts & Tank tops', 'Basics', 'Jackets & Suits', 'Accessories', 'Shoes', 'Underwear & Loungewear', 'Sportswear', 'Swimwear', 'Shorts', 'Casual', 'Divided', 'H&M Man', 'Modern Classics']
-    output = "picture,price,score,link,material,name,keyword"
+    output = "picture,price,score,link,material,name,keyword,brand"
     for q in queries:
         output += query(q)
     f = open('hm.csv','w',errors='ignore')
@@ -22,11 +22,11 @@ def query(q):
     links = soup.find_all('a', {'target': '_self'})
     output = ""
     for link in links:
-        output += "\n" + parse_item(link.get('href'))
+        output += "\n" + parse_item(link.get('href'),q)
     print("-----COMPLETED " + q)
     return output
     
-def parse_item(url):
+def parse_item(url,keyword):
     row = ""
     
     f = urllib.request.urlopen(url)
@@ -51,7 +51,8 @@ def parse_item(url):
     name_end = HTML.find('<span class="price"')
     name = HTML[HTML.rfind('>',name_end-100,name_end)+1:name_end].strip()
     row += name + ","
-    row += "," #keywords
+    row += keyword+"," #keywords
+    row += "hm," #brand
     print("processed " + name)
     return row
 
