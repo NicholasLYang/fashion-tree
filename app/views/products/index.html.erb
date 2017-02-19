@@ -94,11 +94,12 @@ $('#check-uniqlo').change(function() {
 
 <article>
     <% @products.take(50).each do |product| %>
-        <% content_tag(:div, class: [ "card-" + product.section, "card-" + product.brand ]) %>
-        <div class="square">
+        <div class="square <%= 'card-' + product.section.downcase %> <%= 'card-' + product.brand.downcase %>">
             <div class="content">
+                <%= link_to product.link do %>
                 <%= image_tag(product.picture, class: "img-responsive") %>
-                <h2><%= product.brand %></h2>
+                <% end %>
+                <p class="product-brand"><%= product.brand %></p>
                 <p><%= product.name %></p>
                 <p id="price">$<%= product.price %></p>
                 <% if product.score < 10.0 %>

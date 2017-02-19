@@ -10,7 +10,7 @@
     width: 90% !important;
 }
 
-h2 {
+.product-brand {
     font-size: 13px !important;
     font-weight: 700 !important;
     text-transform: uppercase;
@@ -125,6 +125,7 @@ input[type=number]::-webkit-outer-spin-button {
     width: 21%;
     padding-bottom: 34%;
     margin: 1.66%;
+    margin-bottom: 0px;
 }
 
 .content {
@@ -145,18 +146,27 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .good-score,
+.ok-score,
 .bad-score {
-    font-weight: 900;
+    font-weight: 900 !important;
 }
 
 .good-score {
-    color: green;
+    color: #228B22;
 }
 
 .ok-score {
-    color: yellow;
+    color: #FFD700;
 }
 
 .bad-score {
     color: red;
+}
+
+.product-brand {
+    text-transform: uppercase;
+}
+
+.img-responsive {
+    height: 70% !important;
 }

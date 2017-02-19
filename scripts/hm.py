@@ -54,7 +54,7 @@ def parse_item(url,keyword):
     # link
     row += url + ","
     # material
-    row += material + ","
+    row += material.replace(',','') + ","
     # name
     name_end = HTML.find('<span class="price"')
     name = HTML[HTML.rfind('>',name_end-100,name_end)+1:name_end].strip()
@@ -68,7 +68,7 @@ def parse_item(url,keyword):
     section = section[:section.find('"')]
     row += section + ","
     # brand
-    row += "hm,"
+    row += "h&m,"
     print("processed " + name)
     return row
 
