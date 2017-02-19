@@ -123,7 +123,7 @@ input[type=number]::-webkit-outer-spin-button {
     float:left;
     position: relative;
     width: 21%;
-    padding-bottom: 34%;
+    padding-bottom: 35%;
     margin: 1.66%;
     margin-bottom: 0px;
 }
@@ -168,7 +168,16 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .img-responsive {
-    height: 70% !important;
+    height: 99% !important;
+}
+
+.square .content a {
+    display: table;
+    width: 169px;
+    height: 200px;
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
 }
 
 .square .content a span {
@@ -176,22 +185,109 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .square .content a:hover span {
-    width: inherit;
-    height: inherit;
-    line-height: 240px;
+    width: 184px;
+    height: 232px;
+    line-height: 210px;
     position: absolute;
     left: 0;
-    top: 0;
-    display: block;
-    text-align: center;
-    background: #000;
-    color: #fff;
+    top: 0; display: block; text-align: center;
+    background: transparent;
 }
 
-.square .content a span b {
-    font-size: 1.5em;
-    padding: 8px 12px;
+span b {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: normal;
+    padding: 6px 8px;
     background: #000;
     color: #fff;
     font-family: 'Lato';
+}
+
+.content a:hover span b:hover {
+    background: #000;
+    cursor: pointer;
+}
+
+.content a img {background: #e7e7e7; border: none; vertical-align: bottom;}
+
+.modal {
+    position: absolute;
+    z-index: 2017;
+    width: 340px;
+    height: 459px;
+    background: #fff;
+    display: block;
+    margin: 0 auto;
+    border: none !important;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    border: none !important;
+}
+
+.modal-title {
+    font-weight: normal;
+}
+
+#prod-image {
+    position: relative;
+    height: auto;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+#prod-image > img{
+    left: 0;
+    top: 0;
+    width: 70%;
+    display: block;
+    margin: 0 auto;
+}
+
+.modal-img {
+    width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+}
+tr {
+    padding: 0;
+}
+
+td {
+    width: 50%;
+    vertical-align: top;
+    padding: 5px;
+    border: 1px solid gray;
+    margin: 0;
+}
+
+#buy {
+    display: block;
+    background: #000;
+    color: #fff;
+    padding: 10px;
+    font-size: 14px;
+    float:right;
+    font-family: 'Lato';
+    border: none;
+    margin: 10px;
+}
+
+#overlay-back {
+    position   : absolute;
+    top        : 0;
+    left       : 0;
+    width      : 100%;
+    height     : 100%;
+    background : #000;
+    opacity    : 0.6;
+    filter     : alpha(opacity=60);
+    z-index    : 5;
+    display    : none;
 }
