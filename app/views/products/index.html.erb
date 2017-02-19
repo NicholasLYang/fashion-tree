@@ -74,22 +74,55 @@ $('#check-kids').change(function() {
 $('#check-hm').change(function() {
     if ($('#check-hm').is(':checked')) {
         $('.card-hm').show();
+        if (!($('#check-uniqlo').is(':checked'))) {
+            $('.card-uniqlo').hide();
+        }
+        if (!($('#check-nordstorm').is(':checked'))) {
+            $('.card-nordstorm').hide();
+        }
     } else {
         $('.card-hm').hide();
+        if ( !($('#check-uniqlo').is(':checked')) && !($('#check-nordstorm').is(':checked'))) {
+            $('.card-nordstorm').show();
+            $('.card-hm').show();
+            $('.card-uniqlo').show();
+        }
     }
 });
 $('#check-nordstorm').change(function() {
     if ($('#check-nordstorm').is(':checked')) {
         $('.card-nordstorm').show();
+        if (!($('#check-hm').is(':checked'))) {
+            $('.card-hm').hide();
+        }
+        if (!($('#check-uniqlo').is(':checked'))) {
+            $('.card-uniqlo').hide();
+        }
     } else {
         $('.card-nordstorm').hide();
+        if ( !($('#check-hm').is(':checked')) && !($('#check-uniqlo').is(':checked'))) {
+            $('.card-nordstorm').show();
+            $('.card-hm').show();
+            $('.card-uniqlo').show();
+        }
     }
 });
 $('#check-uniqlo').change(function() {
     if ($('#check-uniqlo').is(':checked')) {
         $('.card-uniqlo').show();
+        if (!($('#check-hm').is(':checked'))) {
+            $('.card-hm').hide();
+        }
+        if (!($('#check-nordstorm').is(':checked'))) {
+            $('.card-nordstorm').hide();
+        }
     } else {
         $('.card-uniqlo').hide();
+        if ( !($('#check-hm').is(':checked')) && !($('#check-nordstorm').is(':checked'))) {
+            $('.card-nordstorm').show();
+            $('.card-hm').show();
+            $('.card-uniqlo').show();
+        }
     }
 });
 </script>

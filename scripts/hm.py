@@ -48,7 +48,6 @@ def parse_item(url,keyword):
 
     try:
         score = score_calculator.main(materials)
-        print(score)
     except TypeError:
         score = 10.98 # Metal value
 
@@ -77,7 +76,6 @@ def parse_item(url,keyword):
     row += section.lower() + ","
     # brand
     row += "hm,"
-
     return row
 
 def make_soup(url):
