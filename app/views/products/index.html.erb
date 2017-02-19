@@ -91,21 +91,12 @@ $('#check-uniqlo').change(function() {
 </script>
 
 <article>
-<<<<<<< HEAD
-    <% @products.each do |product| %>
+    <% @products.take(30).each do |product| %>
         <% content_tag(:div, class: [ product.category, product.brand ]) %>
         <div class="square">
             <div class="content">
                 <%= image_tag(product.picture, class: "img-responsive") %>
                 <h2><%= product.brand %></h2>
-=======
-    <% @products.take(30).each do |product| %>
-        <% content_tag(:div, class: "strong") %>
-        <div class="square">
-            <div class="content">
-                <%= image_tag(product.picture, class: "img-responsive") %>
-                <h2>UNIQLO</h2>
->>>>>>> 6ea17449125a05490f2e600341a36d9d14e4e579
                 <p><%= product.name %></p>
                 <p id="price">$<%= product.price %></p>
                 <% if product.score < 10.0 %>
