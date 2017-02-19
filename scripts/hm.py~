@@ -47,7 +47,7 @@ def parse_item(url,keyword):
     print(material)
 
     try:
-        score = score_calculator.calculate_score(material)
+        score = score_calculator.calculate_score(materials)
     except TypeError:
         score = 10.98 # Metal value
 
@@ -78,9 +78,11 @@ def parse_item(url,keyword):
     row += "hm,"
     return row
 
+parse_item('http://www.hm.com/us/product/60442?article=60442-A','jeans')
+
 def make_soup(url):
     r = requests.get(url)
     soup = BeautifulSoup(r.content, "html.parser")
     return soup
 
-main()
+#main()

@@ -38,7 +38,10 @@ def read_materials(m):
     materials = []
     for e in n:
         a = []
-        percentage = float(e.split(" ")[0].replace("%",""))/100
+        try:
+            percentage = float(e.split(" ")[0].replace("%",""))/100
+        except:
+            continue
         a.append(percentage)
         if e.split(" ")[1] != 'Nothing':
             fabric = e.split(" ")[1].lower()
@@ -53,9 +56,3 @@ def calculate_score(m):
     score = round((score + 20) / 2)
     return score
         
-
-with open('uniqlo3.csv','r') as u:
-    reader = csv.reader(u)
-    next(reader)
-    for line in reader:
-        print(calculate_score(line[5]))
