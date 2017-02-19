@@ -23,7 +23,7 @@ def main():
     f.close()
 
 
-def query(key):    
+def query(key):
     url = "http://shop.nordstrom.com/sr?contextualsectionid=60137519&origin=keywordsearch&keyword=" + key.replace(" ","+")
     soup = header(url)
     links = soup.find_all('a', {'class': 'product-href'})
@@ -77,8 +77,11 @@ def parse_item(url):
 
     # section
     li = soup.find('li', {'data-element' : 'item_1'})
-    section = li.findChildren()[0].text
-    row += section + ","
+    if li:
+        section = li.findChildren()[0].text
+        row += section + ","
+    else:
+        row += ","
 
     # brand
     section = soup.find('section', {'class' : 'brand-title'})
@@ -86,7 +89,8 @@ def parse_item(url):
     row += "Nordstorm,"
     print("processing" + name)
     return row
- 
+
+
 def computeScore(material):
     energy_consumption = {
         'cotton': 49,

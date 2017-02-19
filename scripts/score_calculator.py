@@ -1,47 +1,58 @@
 import csv
 from collections import Counter
 energy_consumption = Counter({
-       'cotton': 49,
-       'wool': 8,
-       'polyester': 109,
-       'viscose': 71,
-       'spandex': 135,
-       'rayon': 68,
-       'acrylic': 2,
-       'nylon': 68,
-       'metallic-fiber': 536,
-       'lyocell': 36,
-       'polyurethane': 25,
+       'cotton': 4.9,
+       'wool': 0.8,
+       'polyester': 10.9,
+       'viscose': 7.1,
+       'spandex': 13.5,
+       'rayon': 6.8,
+       'acrylic': 0.2,
+       'nylon': 6.8,
+       'metallic-fiber': 53.6,
+       'lyocell': 3.6,
+       'polyurethane': 2.5,
        })
 water_consumption = Counter({
-    'cotton': 12500,
-    'wool': 125,
+    'cotton': 125.0,
+    'wool': 12.5,
     'polyester': 0,
-    'viscose': 640,
-    'spandex': 26,
-    'rayon': 190,
-    'acrylic': 2,
-    'nylon': 2,
-    'metallic-fiber': 12,
-    'lyocell': 12,
-    'polyurathane': 790,
+    'viscose': 64.0,
+    'spandex': 2.6,
+    'rayon': 19.0,
+    'acrylic': 0.2,
+    'nylon': 0.2,
+    'metallic-fiber': 1.2,
+    'lyocell': 1.2,
+    'polyurathane': 79.0,
 })
 
-def read_materials(materials):
-    out = map(lambda s: reversed(s.split(" ")), materials)
-    try:
-        return dict(list(out))
-    except ValueError:
-        return None
-
-def calculate_score(materials):
-    if materials == None:
-        return None
-    out = 0.1
-    for key in materials:
-        val = int(materials[key][:-1])
-        out = out + (water_consumption[key.lower()] + energy_consumption[key.lower()]) * val
-    return out
-
-def main(materials):
-    return calculate_score(read_materials(materials))
+def read_materials(m):
+    remove = "[]'"
+    for char in remove:
+        if char in m:
+            m = m.replace(char,'')
+    n = m.split(', ')
+    while len(n) < 3:
+        n.append('0 Nothing')
+    materials = []
+    for e in n:
+        a = []
+        try:
+            percentage = float(e.split(" ")[0].replace("%",""))/100
+        except:
+            continue
+        a.append(percentage)
+        if e.split(" ")[1] != 'Nothing':
+            fabric = e.split(" ")[1].lower()
+            a.append(fabric)
+            materials.append(a)
+    return materials
+def calculate_score(m):
+    m = read_materials(m)
+    score = 0
+    for item in m:
+        score += item[0] * water_consumption[item[1]] + item[0] * energy_consumption[item[1]]
+    score = round((score + 20) / 2)
+    return score
+        
