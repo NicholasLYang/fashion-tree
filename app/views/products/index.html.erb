@@ -5,13 +5,18 @@
     background: #fff;
 }
 </style>
+
 <body id="body">
+    <br><br><br><br>
+    <span class="search"><i class="fa fa-search" aria-hidden="true"></i>
+    <input type="text" id="search-me" onkeydown="search(this)" placeholder="Search Shirts, Jeans, Dresses and more"></span>
+    <br>
+
+
 
 <div class="container">
 
-<br><br>
-<span class="search"><i class="fa fa-search" aria-hidden="true"></i>
-<input type="text" placeholder="Search Shirts, Jeans, Dresses and more"></span>
+
 
 <div class="left">
     <p class="section-head">Category</p>
@@ -166,7 +171,7 @@ $('#check-uniqlo').change(function() {
     <!--TODO: MODAL-->
     <% product_number = 0 %>
     <% @products.take(50).each do |product| %>
-        <div class="square <%= 'card-' + product.section.downcase %> <%= 'card-' + product.brand.downcase %>">
+        <div data-kw="<%= product.keyword %>" class="square <%= 'card-' + product.section.downcase %> <%= 'card-' + product.brand.downcase %>">
             <div class="content">
                 <%= link_to product.link do %>
                     <%= image_tag(product.picture, class: "img-responsive") %>
@@ -185,7 +190,7 @@ $('#check-uniqlo').change(function() {
                     <p class="bad-score">98</p>
                 <% elsif product.score < 12.0 %>
                     <p class="good-score"><%= product.score %></p>
-                <% elsif product.score < 100.0 %>
+                <% elsif product.score < 70.0 %>
                     <p class="ok-score"><%= product.score  %></p>
                 <% else %>
                     <p class="bad-score"><%= product.score %></p>
@@ -196,46 +201,13 @@ $('#check-uniqlo').change(function() {
         function showDiv() {
            document.getElementById('modal<%=49-product_number%>').style.display = "block";
         }
-        $('#trigger').on('click', function () {
-    $('#overlay, #overlay-back').fadeIn(500);
-});
-
         function hideDiv() {
             document.getElementById('modal<%=49-product_number%>').style.display = "none";
         }
 
         </script>
-        <div id="overlay-back"></div>
-<div id="overlay">
-        <div class="modal" id="modal<%=product_number%>" style="display:none">
-
-            <div class="modal-content">
-            <h2 class="modal-title"><%= product.name %> $<%= product.price %></h2>
-            <div id="prod-image">
-                <%= image_tag(product.picture, class: "img-modal") %>
-            </div>
-            <table><tr><td>
-                     flexible washed superstretch denim for added freedom of movement. Elasticized waistband, mock front pockets, and regular back pockets. 60% cotton, 38% polyester, 2% spandex.
-                    </td>
-                    <td>
-                    <p class="green-index">Green Index:<br>
-                        <% if product.score == 0 %>
-                            <p class="bad-score">98</p>
-                        <% elsif product.score < 12.0 %>
-                            <p class="good-score"><%= product.score %></p>
-                        <% elsif product.score < 100.0 %>
-                            <p class="ok-score"><%= product.score  %></p>
-                        <% else %>
-                            <p class="bad-score"><%= product.score %></p>
-                        <% end %>
-                    </p>
-                </td></tr></table>
-
-            <button id="buy">Shop Now</button>
-
-          </div>
-
-      </div></div>
+        <%= content_tag :div, id: "temp" + (49 - product_number).to_s, data: {temp: product.keyword} do %>
+        <%end%>
         <% product_number += 1 %>
     <% end %>
 </article>
@@ -243,3 +215,19 @@ $('#check-uniqlo').change(function() {
 </div>
 
 </body>
+<script>
+function search(ele) {
+    if(event.keyCode == 13) {
+
+        for (var i = 0; i < 50; i++) {
+            var id = "temp" + i.toString();
+            if (document.getElementById(id).getAttribute('data-temp') == document.getElementById('search-me').value){
+                document.getElementById(id).style.display == "none";
+                console.log(3);
+
+            }
+
+        }
+    }
+}
+</script>
