@@ -1,24 +1,5 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Fashion Tree is the application for the environmentally concerned shopper. Fashion Tree analyzes the material composition of the clothing, along
+with the sourcing and price, then, using a custom algorithm, it determines the environmental impact of the clothing. Furthermore, it compiles 
+the overall impact of a given brand and displays it. 

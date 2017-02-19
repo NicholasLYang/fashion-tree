@@ -1,24 +1,96 @@
 from bs4 import BeautifulSoup
+import urllib.request
 import requests
 import re
-import urllib.request
-import csv
+import score_calculator
 
 def header(url):
-	headers = {
-	    'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36'
-	}
-	r = requests.get(url, headers=headers)
-	soup = BeautifulSoup(r.content, "html.parser")
-	return soup
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36'
+    }
+    r = requests.get(url, headers=headers)
+    soup = BeautifulSoup(r.content, "html.parser")
+    return soup
 
-def gen_url(key):
+def main():
+    output = "picture,price,link,wattage,score,name,category,brand,keyword"
+    queries = ['Lenovo Laptop', 'Asus Laptop', 'Apple Laptop', 'Toshiba Laptop', 'Dell Laptop', 'Razor Laptop', 'Samsung Laptop', 'HP Laptop']
+    output = "picture,price,link,wattage,score,name,category,brand,keyword"
+    for key in queries:
+        output += query(key)
+    f = open('newegg.csv','w',errors='ignore')
+    f.write(output)
+    f.close()
+
+def query(key):    
 	url = "https://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=" + key.replace(" ","+") + "&N=-1&isNodeId=1"
-	return url
+	soup = header(url)
+    links = soup.find_all('a', {'class': 'item-title'})
+    output = ""
+    for link in links:
+        output += "\n" + parse_item(link.get('href'))
+        output += key
+    print("-----COMPLETED " + key)
+    return output
 
+def parse_item(url):
+    soup = header(url)
+    row = ""
+
+    # image
+    span = soup.find('span', {'class' : 'mainSlide'})
+    if span :
+        src = span.findChildren()[0].get('src')
+        row += src + ","
+    else:
+        row += ","
+
+    # price
+    if soup.find('div', {'class' : 'price-current'}):
+        p = soup.find('div', {'class' : 'price-current'}).text
+    else:
+        p = soup.find('div', {'class' : 'price-display-item regular-price'}).text
+    q = re.compile("\d+\.\d+")
+    price = q.findall(p)[0]
+    row += price + ","
+
+    # link
+    row += url + ","
+
+    # material and score
+    div2 = soup.find('div', {'class' : 'product-details-and-care'})
+    r = re.compile("\d+\%")
+    ul = div2.findChildren()[0].find_next_sibling()
+    m = ul.find('li', {'data-reactid' : r})
+    if m:
+        material = m.text
+        row += material.replace(',',' ') + "," + str(computeScore(material)) + ","
+    else:
+        row += ",,"
+
+    # name
+    section = soup.find('section', {'class' : 'np-product-title'})
+    name = section.findChildren()[0].text
+    row += name + ","
+
+    # category
+    li = soup.find('li', {'data-element' : 'item_1'})
+    category = li.findChildren()[0].text
+    row += category + ","
+
+    # brand
+    section = soup.find('section', {'class' : 'brand-title'})
+    data = section.findChildren()
+    row += "Nordstorm,"
+    print("processing" + name)
+    return row
+
+parse_item('https://www.newegg.com/Product/Product.aspx?Item=N82E16834332305&cm_re=lenovo_laptop-_-34-332-305-_-Product')
+
+'''
 def main(key):
 	soup = header(gen_url(key))
-	links = soup.find_all('a', {'class': 'item-img'})
+	links = soup.find_all('a', {'class': 'item-title'})
 	img = []
 	for link in links:
 		children = link.findChildren()
@@ -88,19 +160,4 @@ d=main('msi laptops')
 f=open('newegg-msi.csv','a')
 f.write(d)
 f.close()
-'''
-input_file = 'newegg.csv'
-output_file = 'NEWegg.csv'
-
-with open(input_file) as f1:
-    lines = f1.readlines()
-
-for line in lines:
-    watt = line.split(",")[3]
-    if watt.isnumeric():
-    	with open(output_file, 'w') as myfile:
-            myfile.write(line)
-
-f1.close()
-myfile.close()
 '''
