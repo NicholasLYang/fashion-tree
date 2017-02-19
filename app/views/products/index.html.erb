@@ -93,6 +93,8 @@ $('#check-uniqlo').change(function() {
 </script>
 
 <article>
+    <!--TODO: MODAL-->
+    </div>
     <% @products.take(50).each do |product| %>
         <div class="square <%= 'card-' + product.section.downcase %> <%= 'card-' + product.brand.downcase %>">
             <div class="content">
