@@ -4,7 +4,7 @@ Fashion Tree is the application for the environmentally concerned shopper. Fashi
 with the sourcing and price, then, using a custom algorithm, it determines the environmental impact of the clothing. Furthermore, it compiles 
 the overall impact of a given brand and displays it. 
 
-Jason first arrives.
+Jason first arrives. Can you spot him?
 ![](https://raw.githubusercontent.com/NicholasLYang/fashion-tree/master/HackNYU-img/hacknyu00.jpg)
 
 The demo went great!
